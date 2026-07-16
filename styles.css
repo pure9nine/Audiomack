@@ -132,25 +132,16 @@ a {
   line-height: 1.2;
   letter-spacing: -0.5px;
   cursor: pointer;
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out,
-    background-color 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-}
-
-.btn:active {
-  transform: translateY(0);
+  opacity: 0.8;
 }
 
 .btn--primary {
   background-image: var(--brand-gradient);
   color: var(--bg);
-}
-
-.btn--primary:hover {
-  box-shadow: 0 14px 32px -12px rgba(249, 165, 3, 0.8);
 }
 
 /* the border is absorbed out of the block padding so the outline button
@@ -160,10 +151,6 @@ a {
   padding-block: 13px;
   background: transparent;
   color: var(--text);
-}
-
-.btn--outline:hover {
-  background: rgba(237, 115, 8, 0.1);
 }
 
 /* ------------------------------------------------------------------- nav */
