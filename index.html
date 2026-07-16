@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Design Previews</title>
+<title>Audiomack — Design Shots</title>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -41,16 +41,19 @@
     letter-spacing: -0.02em;
   }
   .sub { margin: 0; color: var(--muted); }
-  .projects {
+  .shots {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
     gap: .75rem;
   }
-  .project a {
-    display: block;
-    padding: 1.25rem 1.4rem;
+  .shot a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -58,17 +61,17 @@
     color: inherit;
     transition: border-color .15s ease, transform .15s ease;
   }
-  .project a:hover {
+  .shot a:hover {
     border-color: var(--accent);
     transform: translateY(-1px);
   }
-  .project .name {
-    font-weight: 600;
-    font-size: 1.05rem;
-    display: block;
-    margin-bottom: .15rem;
+  .shot .name { font-weight: 600; }
+  .shot .date {
+    color: var(--muted);
+    font-size: .85rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
-  .project .meta { color: var(--muted); font-size: .875rem; }
   footer {
     margin-top: 3.5rem;
     padding-top: 1.5rem;
@@ -90,21 +93,21 @@
 <div class="wrap">
 
   <header>
-    <h1>Design Previews</h1>
-    <p class="sub">Work in progress. Nothing here is final.</p>
+    <h1>Audiomack — Design Shots</h1>
+    <p class="sub">Work in progress — previews below. Nothing here is final.</p>
   </header>
 
-  <ul class="projects">
-    <li class="project">
-      <a href="Audiomack/">
-        <span class="name">Audiomack</span>
-        <span class="meta">Design shots — updated 2026-07-16</span>
+  <ul class="shots">
+    <li class="shot">
+      <a href="shots/sample-shot.html">
+        <span class="name">Sample Shot — layout test</span>
+        <span class="date">2026-07-16</span>
       </a>
     </li>
   </ul>
 
   <footer>
-    Add a project by creating a folder with its own <code>index.html</code>, then adding a row above.
+    Add a shot by dropping an HTML file in <code>shots/</code> and adding a row above.
   </footer>
 
 </div>
