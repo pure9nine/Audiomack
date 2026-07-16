@@ -761,6 +761,19 @@ a {
   margin-inline: auto;
 }
 
+/* Frame 16657:2641 — the playlist rail runs edge to edge up to 1440 and drifts
+   left forever. The second strip is cloned in by main.js. */
+.rail--marquee {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+}
+
+.rail--marquee .rail__track {
+  justify-content: flex-start;
+  gap: 32px;
+  will-change: transform;
+}
+
 .rail__fade {
   position: absolute;
   top: 0;
@@ -817,11 +830,6 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease-out;
-}
-
-.tile:hover .tile__art img {
-  transform: scale(1.05);
 }
 
 .tile__text {
@@ -1398,6 +1406,11 @@ a {
     gap: 16px;
   }
 
+  /* the seam between the two marquee strips has to match the strip's own gap */
+  .rail--marquee .rail__track {
+    gap: 16px;
+  }
+
   .tile {
     width: 183px;
   }
@@ -1413,6 +1426,12 @@ a {
 
   .rail__fade {
     display: none;
+  }
+
+  /* the playlist rail still runs past both edges here, so it keeps its fades */
+  .rail--marquee .rail__fade {
+    display: block;
+    width: 64px;
   }
 
   /* ---------------------------------------------------------- testimonial */
