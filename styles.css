@@ -153,8 +153,11 @@ a {
   box-shadow: 0 14px 32px -12px rgba(249, 165, 3, 0.8);
 }
 
+/* the border is absorbed out of the block padding so the outline button
+   still measures the same height as the solid one beside it */
 .btn--outline {
   border: 3px solid var(--brand-from);
+  padding-block: 13px;
   background: transparent;
   color: var(--text);
 }
@@ -194,6 +197,60 @@ a {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+/* the hamburger and the icon-only search both appear at the mobile breakpoint */
+.nav__menu,
+.nav__search-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* three bars: the centre one is the element, the outer two are its edges */
+.nav__menu-bars,
+.nav__menu-bars::before,
+.nav__menu-bars::after {
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--text);
+}
+
+.nav__menu-bars {
+  position: relative;
+}
+
+.nav__menu-bars::before,
+.nav__menu-bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav__menu-bars::before {
+  top: -5px;
+}
+
+.nav__menu-bars::after {
+  top: 5px;
+}
+
+/* masked so the orange source SVG can be drawn in white */
+.nav__search-glyph {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: var(--text);
+  -webkit-mask: url("img/icon-search.svg") center / contain no-repeat;
+  mask: url("img/icon-search.svg") center / contain no-repeat;
 }
 
 .logo {
@@ -421,6 +478,11 @@ a {
   line-height: 1.4;
   letter-spacing: -0.5px;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.85);
+}
+
+.hero__lede strong {
+  color: var(--text);
+  font-weight: 700;
 }
 
 .hero__actions {
@@ -677,25 +739,37 @@ a {
 
 /* ------------------------------------------------------------ card rails */
 
-/* rails are wider than the column on purpose; the mask hides the cut edges */
+/* rails are wider than the column on purpose and run to the frame edge */
 .rail {
   position: relative;
   width: 100%;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    #000 14%,
-    #000 86%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    #000 14%,
-    #000 86%,
-    transparent 100%
-  );
+}
+
+/* Frame 26086895 — the World rail is clipped to the content column instead,
+   with a black rectangle fading inward over each cut edge. */
+.rail--framed {
+  width: min(100% - var(--gutter) * 2, var(--container));
+  margin-inline: auto;
+}
+
+.rail__fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 188px;
+  pointer-events: none;
+}
+
+.rail__fade--start {
+  left: 0;
+  background: linear-gradient(to right, var(--bg), transparent);
+}
+
+.rail__fade--end {
+  right: 0;
+  background: linear-gradient(to left, var(--bg), transparent);
 }
 
 .rail__track {
@@ -747,7 +821,7 @@ a {
 }
 
 .tile__title {
-  margin: 12px 0 0;
+  margin: 4px 0 0;
   width: 81.9%;
   font-size: 16px;
   font-weight: 700;
@@ -779,11 +853,6 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease-out;
-}
-
-.world-card:hover img {
-  transform: scale(1.05);
 }
 
 /* -------------------------------------------------- creator dashboard */
@@ -1114,4 +1183,357 @@ a {
   display: flex;
   flex-direction: column;
   gap: 160px;
+}
+
+/* ==========================================================================
+   Tablet — the 385px search field can no longer sit between the brand and
+   the actions, so it drops out. Everything else still runs the 1440 layout.
+   ========================================================================== */
+
+@media (max-width: 1023px) {
+  .nav__search {
+    display: none;
+  }
+
+  .split {
+    gap: 48px;
+  }
+}
+
+/* ==========================================================================
+   Mobile — ported from Figma "AM — Desktop" / AM-Home-Mobile (16702:11091),
+   a 375 frame with a 16px gutter.
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: 16px;
+    --section-gap: 100px;
+  }
+
+  /* the pair closes up to the same rhythm as the sections around it */
+  .stack__pair {
+    gap: 100px;
+  }
+
+  /* ----------------------------------------------------------------- nav */
+
+  .nav__inner {
+    height: 64px;
+    gap: 12px;
+  }
+
+  .nav__menu,
+  .nav__search-btn {
+    display: flex;
+  }
+
+  .nav__brand {
+    gap: 8px;
+  }
+
+  /* the field is gone; only the icon that opens it remains */
+  .pill-plus,
+  .btn-upload {
+    display: none;
+  }
+
+  .nav__search-glyph {
+    width: 16px;
+    height: 16px;
+  }
+
+  .logo {
+    gap: 6px;
+  }
+
+  .logo__mark {
+    width: 22px;
+    height: 15px;
+  }
+
+  .logo__word {
+    width: 90px;
+    height: 14px;
+  }
+
+  .auth {
+    gap: 9px;
+  }
+
+  /* ---------------------------------------------------------------- hero */
+
+  .hero__stage {
+    aspect-ratio: 375 / 232;
+  }
+
+  /* the backdrop is cropped rather than letterboxed at this ratio */
+  .hero__type {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero__type img {
+    object-fit: cover;
+  }
+
+  /* the floating artwork is dropped entirely on mobile */
+  .hero__cards {
+    display: none;
+  }
+
+  /* the copy sits a touch above the optical centre of the shorter stage */
+  .hero__copy {
+    gap: 0;
+    padding: 16px 16px 25px;
+  }
+
+  .hero__title {
+    font-size: 24px;
+    letter-spacing: -0.8px;
+  }
+
+  .hero__lede {
+    max-width: 300px;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .hero__actions {
+    margin-top: 16px;
+  }
+
+  /* only the hero pair shrinks — section CTAs keep their desktop size */
+  .hero__actions .btn {
+    padding: 13px 20px;
+    font-size: 12px;
+  }
+
+  .hero__actions .btn--outline {
+    padding-block: 10px;
+  }
+
+  /* --------------------------------------------------------------- stats */
+
+  /* the card sits on an 8px gutter rather than the page's 16px */
+  .stats {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-inline: -8px;
+  }
+
+  /* one divider per axis, crossing the whole card */
+  .stats::before,
+  .stats::after {
+    content: "";
+    position: absolute;
+    background: var(--line);
+  }
+
+  .stats::before {
+    top: 20px;
+    bottom: 20px;
+    left: 50%;
+    width: 1px;
+  }
+
+  .stats::after {
+    top: 50%;
+    right: 16px;
+    left: 16px;
+    height: 1px;
+  }
+
+  .stat {
+    padding: 25px 8px;
+  }
+
+  .stat + .stat::before {
+    display: none;
+  }
+
+  .stat__num {
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+
+  .stat__prefix {
+    font-size: 24px;
+  }
+
+  .stat--rank .stat__num {
+    letter-spacing: 2px;
+  }
+
+  /* narrow enough to break every label onto two lines, as drawn */
+  .stat__label {
+    max-width: 80px;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  /* ------------------------------------------- two-column text and media */
+
+  .split {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Creators leads with its dashboard on mobile; Discovery already does */
+  .split__body,
+  .split__media {
+    width: 100%;
+    flex: none;
+  }
+
+  .split > .split__media {
+    order: -1;
+  }
+
+  .section-copy h2,
+  .section__head h2 {
+    font-size: 32px;
+  }
+
+  .section-copy--narrow h2,
+  .section-copy--narrow p,
+  .section-copy--narrow .bullets {
+    max-width: none;
+  }
+
+  /* --------------------------------------------------------------- rails */
+
+  .rail__items {
+    gap: 16px;
+  }
+
+  .tile {
+    width: 183px;
+  }
+
+  .world-card {
+    width: 201px;
+  }
+
+  /* the World rail runs to the frame edge here — no column clip, no fades */
+  .rail--framed {
+    width: 100%;
+  }
+
+  .rail__fade {
+    display: none;
+  }
+
+  /* ---------------------------------------------------------- testimonial */
+
+  .quote__inner {
+    flex-direction: column;
+    aspect-ratio: 375 / 638;
+  }
+
+  .quote__text {
+    font-size: 32px;
+  }
+
+  /* The mark moves into the flow above the quote; the closing one is dropped.
+     line-height stays at 1 so the gradient's box still covers the glyph
+     (background-clip:text paints nothing outside it) — the empty space the
+     full line box brings with it is clawed back with negative margins. */
+  .quote__mark--open {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: 10;
+    margin-block: -30px -51px;
+    line-height: 1;
+  }
+
+  .quote__mark--close {
+    display: none;
+  }
+
+  .quote__avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .quote__name {
+    font-size: 16px;
+  }
+
+  .quote__handle {
+    font-size: 14px;
+  }
+
+  /* ---------------------------------------------------- wordmark + footer */
+
+  .wordmark {
+    padding-inline: 8px;
+  }
+
+  .footer {
+    padding-top: 38px;
+  }
+
+  /* the footer unstacks to the left, and the social row moves below the badges */
+  .footer__inner {
+    align-items: flex-start;
+  }
+
+  .footer__mark {
+    align-self: center;
+  }
+
+  .footer__nav {
+    order: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 10px;
+  }
+
+  .footer__nav a {
+    font-size: 14px;
+  }
+
+  /* The two badges size to their own content here rather than sharing the row.
+     At 375 the pair is a few px wider than the gutter allows — as drawn — so
+     the row is given back its right gutter; narrower screens still wrap. */
+  .badges {
+    order: 2;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 24px;
+    margin-right: calc(var(--gutter) * -1);
+  }
+
+  .badge {
+    width: auto;
+  }
+
+  .footer__social {
+    order: 3;
+    margin-top: 25px;
+  }
+
+  .footer__about {
+    order: 4;
+    margin-top: 25px;
+    text-align: left;
+  }
+
+  .footer__legal {
+    order: 5;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .footer__copyright {
+    order: 6;
+    margin-top: 17px;
+  }
 }

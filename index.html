@@ -19,6 +19,9 @@
     <header class="nav" id="nav">
       <nav class="nav__inner">
         <div class="nav__brand">
+          <button class="nav__menu" type="button" aria-label="Menu">
+            <span class="nav__menu-bars" aria-hidden="true"></span>
+          </button>
           <a class="logo" href="./" aria-label="Audiomack home">
             <img class="logo__mark" src="img/logo-mark.svg" alt="" />
             <img class="logo__word" src="img/logo-word.svg" alt="Audiomack" />
@@ -40,6 +43,9 @@
         </div>
 
         <div class="nav__actions">
+          <button class="nav__search-btn" type="button" aria-label="Search">
+            <span class="nav__search-glyph" aria-hidden="true"></span>
+          </button>
           <div class="auth">
             <a href="#">Sign Up</a>
             <span class="auth__divider" aria-hidden="true"></span>
@@ -94,7 +100,7 @@
             <h1 class="hero__title">The music platform<br />empowering artists</h1>
             <p class="hero__lede">
               Audiomack is an artist-first music platform that helps musicians
-              reach and engage fans across the world.
+              reach and <strong>engage fans across the world.</strong>
             </p>
             <div class="hero__actions">
               <a class="btn btn--primary" href="#">Discover New Music</a>
@@ -125,7 +131,7 @@
               </div>
               <div class="stat">
                 <div class="stat__value"><span class="stat__num">65M+</span></div>
-                <p class="stat__label">Uploads</p>
+                <p class="stat__label">Music Uploads</p>
               </div>
             </div>
           </div>
@@ -326,7 +332,8 @@
             </div>
           </div>
 
-          <div class="rail">
+          <!-- Frame 26086895: clipped to the content column, black fades either side -->
+          <div class="rail rail--framed">
             <div class="rail__track">
               <div class="rail__items">
                 <div class="world-card"><img src="img/world-1.jpg" alt="" /></div>
@@ -336,6 +343,8 @@
                 <div class="world-card"><img src="img/world-4.jpg" alt="" /></div>
               </div>
             </div>
+            <div class="rail__fade rail__fade--start" aria-hidden="true"></div>
+            <div class="rail__fade rail__fade--end" aria-hidden="true"></div>
           </div>
 
           <a class="btn btn--primary" href="#">Explore Audiomack World</a>
