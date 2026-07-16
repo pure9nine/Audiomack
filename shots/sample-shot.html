@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sample Shot — layout test</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --surface: #ffffff;
+    --border: #e6e4e0;
+    --text: #1a1917;
+    --muted: #6b6862;
+    --accent: #3b5bdb;
+    --ok-bg: #e7f5ec;
+    --ok-border: #9bd4b0;
+    --ok-text: #1c6b3c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16151a;
+      --surface: #1e1d23;
+      --border: #33313a;
+      --text: #ebe9e4;
+      --muted: #9a968e;
+      --accent: #8da2fb;
+      --ok-bg: #142d1f;
+      --ok-border: #2f6b45;
+      --ok-text: #7ed9a3;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.5rem 5rem;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  .back {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .9rem;
+  }
+  .back:hover { color: var(--accent); }
+  h1 {
+    margin: 0 0 .4rem;
+    font-size: 1.9rem;
+    letter-spacing: -0.02em;
+  }
+  .sub { margin: 0 0 2.5rem; color: var(--muted); }
+  .check {
+    background: var(--ok-bg);
+    border: 1px solid var(--ok-border);
+    color: var(--ok-text);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2.5rem;
+    font-weight: 500;
+  }
+  h2 {
+    font-size: 1.1rem;
+    margin: 2.5rem 0 .75rem;
+    letter-spacing: -0.01em;
+  }
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: .6rem;
+  }
+  .sw {
+    height: 64px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: flex-end;
+    padding: .4rem .5rem;
+    font-size: .7rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.4);
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+  button {
+    font: inherit;
+    font-weight: 500;
+    padding: .55rem 1.1rem;
+    border-radius: 7px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+  }
+  button.ghost {
+    background: transparent;
+    color: var(--accent);
+  }
+  button:hover { opacity: .88; }
+  .row { display: flex; gap: .6rem; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="../index.html">← All shots</a>
+
+  <h1>Sample Shot</h1>
+  <p class="sub">A throwaway page to confirm GitHub Pages is serving correctly.</p>
+
+  <div class="check">
+    ✓ If you can read this styled box, HTML and CSS are being served correctly.
+  </div>
+
+  <h2>Relative path check</h2>
+  <div class="card">
+    The “All shots” link above points to <code>../index.html</code>. If it takes you
+    back to the index, relative paths resolve correctly under the
+    <code>/playground/</code> subpath — the thing most likely to break on Pages.
+  </div>
+
+  <h2>Color</h2>
+  <div class="swatches">
+    <div class="sw" style="background:#3b5bdb">#3b5bdb</div>
+    <div class="sw" style="background:#1c6b3c">#1c6b3c</div>
+    <div class="sw" style="background:#b1451f">#b1451f</div>
+    <div class="sw" style="background:#5f3dc4">#5f3dc4</div>
+  </div>
+
+  <h2>Type</h2>
+  <div class="card">
+    <p style="margin:0 0 .5rem;font-size:1.5rem;font-weight:600;letter-spacing:-.02em;">Display — the quick brown fox</p>
+    <p style="margin:0 0 .5rem;">Body — the quick brown fox jumps over the lazy dog.</p>
+    <p style="margin:0;color:var(--muted);font-size:.85rem;">Caption — supporting detail.</p>
+  </div>
+
+  <h2>Buttons</h2>
+  <div class="row">
+    <button>Primary</button>
+    <button class="ghost">Secondary</button>
+  </div>
+
+</div>
+</body>
+</html>
