@@ -857,36 +857,17 @@ a {
 
 /* -------------------------------------------------- creator dashboard */
 
+/* a flattened 536x480 export of the Figma "creators" frame — the four panels,
+   their edge fades, and the clipped right edge are all baked into the asset.
+   Transparent between the panels, so the page background shows through. */
 .dashboard {
-  position: relative;
   width: 100%;
   aspect-ratio: 536 / 480;
-  overflow: hidden;
 }
 
-/* each panel is a window onto a larger artboard; offsets are % of the panel */
-.panel {
-  position: absolute;
-  overflow: hidden;
-  border-radius: 16px;
-  background: #0f0f0f;
-  /* inset ring, not a border — keeps the art's % offsets on the full box */
-  box-shadow: inset 0 0 0 1px var(--line);
-}
-
-.panel img {
-  position: absolute;
-  max-width: none;
-}
-
-/* design darkens the top of each panel, not the bottom */
-.panel__fade {
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  height: 45%;
-  pointer-events: none;
-  background: linear-gradient(to bottom, var(--bg), transparent);
+.dashboard img {
+  width: 100%;
+  height: 100%;
 }
 
 /* ----------------------------------------------------------- testimonial */
