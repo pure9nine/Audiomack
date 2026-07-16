@@ -141,14 +141,18 @@
             <div class="split">
               <div class="split__media">
                 <div class="collage">
-                  <div class="collage__col collage__col--a" data-layer="collage-column-0">
-                    <figure><img src="img/collage-1.jpg" alt="" /></figure>
-                    <figure><img src="img/collage-2.jpg" alt="" /></figure>
-                    <figure><img src="img/collage-3.jpg" alt="" /></figure>
+                  <!-- each column is one exported strip, doubled so the drift loops seamlessly -->
+                  <div class="collage__col collage__col--a">
+                    <div class="collage__track collage__track--up">
+                      <img src="img/artists-left.png" alt="" />
+                      <img src="img/artists-left.png" alt="" aria-hidden="true" />
+                    </div>
                   </div>
-                  <div class="collage__col collage__col--b" data-layer="collage-column-1">
-                    <figure><img src="img/collage-4.jpg" alt="" /></figure>
-                    <figure><img src="img/collage-5.jpg" alt="" /></figure>
+                  <div class="collage__col collage__col--b">
+                    <div class="collage__track collage__track--down">
+                      <img src="img/artists-right.png" alt="" />
+                      <img src="img/artists-right.png" alt="" aria-hidden="true" />
+                    </div>
                   </div>
                   <div class="collage__fade collage__fade--top" aria-hidden="true"></div>
                   <div class="collage__fade collage__fade--bottom" aria-hidden="true"></div>

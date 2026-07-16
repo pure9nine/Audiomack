@@ -653,9 +653,6 @@ a {
 /* two offset columns; kept as separate nodes so they can scroll opposite ways */
 .collage__col {
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
   width: 44.37%;
 }
 
@@ -669,19 +666,43 @@ a {
   top: -5%;
 }
 
-.collage__col figure {
-  margin: 0;
-  aspect-ratio: 238 / 252;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: #1e1e1e;
+/* Each track holds the strip twice. The trailing margin is on BOTH copies, so
+   the track is exactly two repeats tall and translating -50% lands copy 2 where
+   copy 1 began — no seam, no jump. 10.09% of the column width == the 24px gap
+   the strip itself uses between cards, so the rhythm stays even across the loop. */
+.collage__track {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  animation: collage-drift 60s linear infinite;
 }
 
-.collage__col img {
+/* corners are baked into the strip as transparency, so no radius needed here */
+.collage__track img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  margin-bottom: 10.09%;
+}
+
+.collage__track--down {
+  animation-duration: 72s;
+  animation-direction: reverse;
+}
+
+@keyframes collage-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collage__track {
+    animation: none;
+  }
 }
 
 .collage__fade {
