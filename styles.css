@@ -1,0 +1,1117 @@
+/* ==========================================================================
+   Audiomack — homepage design shot
+   Ported from Figma "AM — Desktop" / AM-Home (16657:2581), a 1440 frame with
+   a 1168 content column. Static: no build step, no CDN, relative paths only.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Geist";
+  src: url("fonts/geist-latin-var.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("fonts/opensans-latin-var.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0d0d0d;
+  --surface: #181818;
+  --surface-raised: #222;
+  --surface-footer: #121212;
+  --surface-tile: #262626;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.15);
+  --text: #fff;
+  --muted: #ccc;
+  --muted-dim: #cacaca;
+  --brand: #ffa200;
+  --brand-from: #ed7308;
+  --brand-to: #f9a503;
+  --brand-gradient: linear-gradient(to left, var(--brand-from), var(--brand-to));
+
+  --font-display: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --container: 1168px;
+  --gutter: 24px;
+  --section-gap: 200px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--brand);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* max-width carries the gutter so the *content* box is a true 1168 at
+   desktop; the padding only starts biting once the window is narrower. */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------- buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border: 0;
+  border-radius: 999px;
+  padding: 16px 40px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out,
+    background-color 0.2s ease-out;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--primary {
+  background-image: var(--brand-gradient);
+  color: var(--bg);
+}
+
+.btn--primary:hover {
+  box-shadow: 0 14px 32px -12px rgba(249, 165, 3, 0.8);
+}
+
+.btn--outline {
+  border: 3px solid var(--brand-from);
+  background: transparent;
+  color: var(--text);
+}
+
+.btn--outline:hover {
+  background: rgba(237, 115, 8, 0.1);
+}
+
+/* ------------------------------------------------------------------- nav */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* toggled from main.js once the page scrolls */
+.nav.is-scrolled {
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.nav__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 96px;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo__mark {
+  width: 25px;
+  height: 17px;
+}
+
+.logo__word {
+  width: 102px;
+  height: 16px;
+}
+
+.pill-plus {
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 8px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  transition: background-color 0.2s ease;
+}
+
+.pill-plus:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.pill-plus span {
+  color: var(--brand);
+}
+
+/* the search field is centred on the 1440 frame, not on the flex row */
+.nav__search {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 385px;
+  height: 48px;
+}
+
+.search {
+  position: relative;
+  height: 100%;
+}
+
+.search__icon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.search__input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 30px;
+  background: var(--surface-raised);
+  padding: 0 16px 0 40px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  transition: background-color 0.2s ease;
+}
+
+.search__input::placeholder {
+  color: var(--muted);
+}
+
+.search__input:focus {
+  outline: none;
+  background: #2a2a2a;
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.auth a {
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+}
+
+.auth a:hover {
+  text-decoration: underline;
+}
+
+.auth__divider {
+  width: 1px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 50px;
+  border-radius: 25px;
+  background: var(--surface-raised);
+  padding-inline: 24px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-upload:hover {
+  background: #2f2f2f;
+}
+
+.btn-upload img {
+  width: 14px;
+  height: 16px;
+}
+
+.btn-upload span {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ hero */
+
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero__stage {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  aspect-ratio: 1440 / 729;
+}
+
+/* backdrop sits at (23,-7) / 1395x730 within the 1440x729 frame */
+.hero__type {
+  position: absolute;
+  top: -0.96%;
+  left: 1.597%;
+  width: 96.875%;
+  height: 100.14%;
+  user-select: none;
+  pointer-events: none;
+}
+
+.hero__type img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.hero__cards {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* each card carries its own left/top/width/aspect inline — see index.html */
+.hero__card {
+  position: absolute;
+  overflow: hidden;
+  box-shadow: 0 18px 50px -12px rgba(0, 0, 0, 0.9);
+}
+
+.hero__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__copy {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 64px;
+  text-align: center;
+}
+
+.hero__title {
+  margin: 0;
+  max-width: 600px;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.85);
+}
+
+.hero__lede {
+  margin: 4px 0 0;
+  max-width: 512px;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.4;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.85);
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+/* ----------------------------------------------------------------- stats */
+
+.stats {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.stat {
+  position: relative;
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 8px;
+  text-align: center;
+}
+
+/* hairline between cells */
+.stat + .stat::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 1px;
+  height: 160px;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.stat__value {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  background-image: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stat__num {
+  font-size: 56px;
+  letter-spacing: -1.5px;
+  white-space: nowrap;
+}
+
+/* the "$" is set smaller and sits on the baseline of the number */
+.stat__prefix {
+  font-size: 40px;
+  letter-spacing: -1.5px;
+  padding-bottom: 0.25em;
+}
+
+.stat--rank .stat__num {
+  letter-spacing: 4px;
+}
+
+.stat__label {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: -0.8px;
+}
+
+/* ------------------------------------------------- two-column text+media */
+
+.split {
+  display: flex;
+  align-items: center;
+  gap: 96px;
+}
+
+.split__media,
+.split__body {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.section-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.section-copy h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.section-copy p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.5px;
+}
+
+.bullets {
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Discovery sets its copy to 448 inside the 536 column; Creators runs full. */
+.section-copy--narrow h2,
+.section-copy--narrow p,
+.section-copy--narrow .bullets {
+  max-width: 448px;
+}
+
+.bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+}
+
+.bullets img {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: 9px;
+}
+
+.bullets a {
+  color: var(--brand);
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------- artist collage */
+
+.collage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 536 / 480;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #000;
+}
+
+/* two offset columns; kept as separate nodes so they can scroll opposite ways */
+.collage__col {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 44.37%;
+}
+
+.collage__col--a {
+  left: 3.52%;
+  top: -33.75%;
+}
+
+.collage__col--b {
+  left: 52.11%;
+  top: -5%;
+}
+
+.collage__col figure {
+  margin: 0;
+  aspect-ratio: 238 / 252;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #1e1e1e;
+}
+
+.collage__col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collage__fade {
+  position: absolute;
+  inset-inline: 0;
+  height: 41.67%;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.collage__fade--top {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bg), transparent);
+}
+
+.collage__fade--bottom {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg), transparent);
+}
+
+/* ------------------------------------------------------ centred sections */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.section__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.section__head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.section__head p {
+  margin: 0;
+  max-width: 730px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.5px;
+}
+
+/* ------------------------------------------------------------ card rails */
+
+/* rails are wider than the column on purpose; the mask hides the cut edges */
+.rail {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
+}
+
+.rail__track {
+  display: flex;
+  justify-content: center;
+}
+
+.rail__items {
+  display: flex;
+  flex-shrink: 0;
+  gap: 32px;
+}
+
+/* playlist tile */
+.tile {
+  width: 232px;
+  flex-shrink: 0;
+}
+
+/* stacked-card edge above the artwork */
+.tile__shelf {
+  width: 93.1%;
+  margin-inline: auto;
+  aspect-ratio: 216 / 8;
+}
+
+.tile__art {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--surface-tile);
+}
+
+.tile__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease-out;
+}
+
+.tile:hover .tile__art img {
+  transform: scale(1.05);
+}
+
+.tile__text {
+  padding-left: 3.45%;
+}
+
+.tile__title {
+  margin: 12px 0 0;
+  width: 81.9%;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.tile__sub {
+  margin: 4px 0 0;
+  width: 93.1%;
+  color: var(--muted-dim);
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+/* Audiomack World card */
+.world-card {
+  position: relative;
+  width: 270px;
+  aspect-ratio: 270 / 338;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.world-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease-out;
+}
+
+.world-card:hover img {
+  transform: scale(1.05);
+}
+
+/* -------------------------------------------------- creator dashboard */
+
+.dashboard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 536 / 480;
+  overflow: hidden;
+}
+
+/* each panel is a window onto a larger artboard; offsets are % of the panel */
+.panel {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #0f0f0f;
+  /* inset ring, not a border — keeps the art's % offsets on the full box */
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.panel img {
+  position: absolute;
+  max-width: none;
+}
+
+/* design darkens the top of each panel, not the bottom */
+.panel__fade {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 45%;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--bg), transparent);
+}
+
+/* ----------------------------------------------------------- testimonial */
+
+.quote {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.quote__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1440px;
+  margin-inline: auto;
+  aspect-ratio: 1440 / 640;
+}
+
+.quote__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quote__wash,
+.quote__fade-y,
+.quote__fade-x {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* 16% orange wash over the collage */
+.quote__wash {
+  background: linear-gradient(to right, rgba(255, 162, 0, 0.16), transparent);
+}
+
+/* flat scrim + edge fades keep the art quiet behind the quote */
+.quote__fade-y {
+  background: linear-gradient(
+    to bottom,
+    #0d0d0d 0%,
+    rgba(13, 13, 13, 0.55) 34%,
+    rgba(13, 13, 13, 0.55) 66%,
+    #0d0d0d 100%
+  );
+}
+
+.quote__fade-x {
+  background: linear-gradient(
+    to right,
+    #0d0d0d 0%,
+    transparent 34%,
+    transparent 66%,
+    #0d0d0d 100%
+  );
+}
+
+.quote__mark {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 120px;
+  font-weight: 700;
+  line-height: 1;
+  background-image: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+}
+
+.quote__mark--open {
+  top: 25%;
+  left: 17.9%;
+}
+
+.quote__mark--close {
+  top: 56.7%;
+  left: 68.9%;
+}
+
+.quote__figure {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 882px;
+  margin: 0;
+  padding-inline: var(--gutter);
+  text-align: center;
+}
+
+.quote__text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.quote__by {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.quote__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.quote__name {
+  margin: 0;
+  text-align: left;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+}
+
+.quote__handle {
+  margin: 0;
+  text-align: left;
+  color: var(--muted-dim);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+}
+
+/* -------------------------------------------------- wordmark and footer */
+
+.wordmark {
+  width: 100%;
+  padding-inline: 16px;
+}
+
+.wordmark img {
+  width: 100%;
+  max-width: 1383px;
+  height: auto;
+  margin-inline: auto;
+}
+
+.footer {
+  width: 100%;
+  background: var(--surface-footer);
+  padding: 48px var(--gutter) 64px;
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+.footer__mark {
+  width: 68px;
+  height: 48px;
+}
+
+.footer__social {
+  width: 171px;
+  height: 16px;
+  margin-top: 32px;
+}
+
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 40px;
+  margin-top: 24px;
+}
+
+.footer__nav a {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+.footer__nav a:hover {
+  color: var(--brand);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 196px;
+  height: 54px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  padding-inline: 12px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.badge:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.badge img {
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.badge__eyebrow {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 13px;
+}
+
+.badge__label {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.footer__about {
+  max-width: 628px;
+  margin: 24px 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+}
+
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 32px;
+  margin-top: 24px;
+}
+
+.footer__legal a {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.footer__legal a:hover {
+  color: var(--brand);
+}
+
+.footer__copyright {
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+}
+
+/* --------------------------------------------------------------- layout */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+  padding-top: 40px;
+}
+
+.stack__pair {
+  display: flex;
+  flex-direction: column;
+  gap: 160px;
+}

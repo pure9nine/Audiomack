@@ -1,115 +1,404 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>Audiomack — Design Shots</title>
-<style>
-  :root {
-    --bg: #fbfbfa;
-    --surface: #ffffff;
-    --border: #e6e4e0;
-    --text: #1a1917;
-    --muted: #6b6862;
-    --accent: #3b5bdb;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #16151a;
-      --surface: #1e1d23;
-      --border: #33313a;
-      --text: #ebe9e4;
-      --muted: #9a968e;
-      --accent: #8da2fb;
-    }
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 3rem 1.5rem 5rem;
-    background: var(--bg);
-    color: var(--text);
-    font: 16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 720px; margin: 0 auto; }
-  header { margin-bottom: 3rem; }
-  h1 {
-    margin: 0 0 .4rem;
-    font-size: 1.9rem;
-    letter-spacing: -0.02em;
-  }
-  .sub { margin: 0; color: var(--muted); }
-  .shots {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: .75rem;
-  }
-  .shot a {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1.1rem 1.25rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color .15s ease, transform .15s ease;
-  }
-  .shot a:hover {
-    border-color: var(--accent);
-    transform: translateY(-1px);
-  }
-  .shot .name { font-weight: 600; }
-  .shot .date {
-    color: var(--muted);
-    font-size: .85rem;
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-  }
-  footer {
-    margin-top: 3.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-    font-size: .85rem;
-  }
-  code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: .85em;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: .1em .4em;
-  }
-</style>
-</head>
-<body>
-<div class="wrap">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Audiomack — The music platform empowering artists</title>
+    <meta
+      name="description"
+      content="Audiomack is an artist-first music platform that helps musicians reach and engage fans across the world."
+    />
+    <link rel="icon" href="img/logo-mark.svg" type="image/svg+xml" />
+    <link rel="preload" href="fonts/geist-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/opensans-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ============================================================ nav -->
+    <header class="nav" id="nav">
+      <nav class="nav__inner">
+        <div class="nav__brand">
+          <a class="logo" href="./" aria-label="Audiomack home">
+            <img class="logo__mark" src="img/logo-mark.svg" alt="" />
+            <img class="logo__word" src="img/logo-word.svg" alt="Audiomack" />
+          </a>
+          <a class="pill-plus" href="#">Get Plus<span>+</span></a>
+        </div>
 
-  <header>
-    <h1>Audiomack — Design Shots</h1>
-    <p class="sub">Work in progress — previews below. Nothing here is final.</p>
-  </header>
+        <div class="nav__search">
+          <form class="search" role="search" onsubmit="return false">
+            <label class="sr-only" for="site-search">Search for artists, songs, albums</label>
+            <img class="search__icon" src="img/icon-search.svg" alt="" />
+            <input
+              class="search__input"
+              id="site-search"
+              type="search"
+              placeholder="Search for artists, songs, albums!"
+            />
+          </form>
+        </div>
 
-  <ul class="shots">
-    <li class="shot">
-      <a href="shots/sample-shot.html">
-        <span class="name">Sample Shot — layout test</span>
-        <span class="date">2026-07-16</span>
-      </a>
-    </li>
-  </ul>
+        <div class="nav__actions">
+          <div class="auth">
+            <a href="#">Sign Up</a>
+            <span class="auth__divider" aria-hidden="true"></span>
+            <a href="#">Sign In</a>
+          </div>
+          <a class="btn-upload" href="#">
+            <img src="img/icon-upload.svg" alt="" />
+            <span>Upload</span>
+          </a>
+        </div>
+      </nav>
+    </header>
 
-  <footer>
-    Add a shot by dropping an HTML file in <code>shots/</code> and adding a row above.
-  </footer>
+    <main>
+      <!-- ========================================================= hero -->
+      <section class="hero">
+        <div class="hero__stage">
+          <!-- extruded type backdrop -->
+          <div class="hero__type" data-layer="hero-type">
+            <img src="img/hero-type.png" alt="" />
+          </div>
 
-</div>
-</body>
+          <!-- floating artist cards; data-depth is a parallax weight -->
+          <div class="hero__cards" data-layer="hero-cards">
+            <div class="hero__card" data-depth="0.9"
+                 style="left:20.417%; top:47.188%; width:11.111%; aspect-ratio:160/200; border-radius:16px">
+              <img src="img/hero-card-1.jpg" alt="" />
+            </div>
+            <div class="hero__card" data-depth="0.45"
+                 style="left:25.972%; top:19.753%; width:7.222%; aspect-ratio:104/130; border-radius:8px">
+              <img src="img/hero-card-2.jpg" alt="" />
+            </div>
+            <div class="hero__card" data-depth="0.5"
+                 style="left:68.542%; top:55.967%; width:7.222%; aspect-ratio:104/130; border-radius:8px">
+              <img src="img/hero-card-3.jpg" alt="" />
+            </div>
+            <div class="hero__card" data-depth="0.75"
+                 style="left:45.347%; top:69.136%; width:12.083%; aspect-ratio:174/98; border-radius:8px">
+              <img src="img/hero-card-4.jpg" alt="" />
+            </div>
+            <div class="hero__card" data-depth="0.6"
+                 style="left:42.222%; top:7.270%; width:9.028%; aspect-ratio:130/162; border-radius:8px">
+              <img src="img/hero-card-5.jpg" alt="" />
+            </div>
+            <div class="hero__card" data-depth="1"
+                 style="left:65.764%; top:12.072%; width:13.472%; aspect-ratio:194/242; border-radius:16px">
+              <img src="img/hero-card-6.jpg" alt="" />
+            </div>
+          </div>
+
+          <div class="hero__copy">
+            <h1 class="hero__title">The music platform<br />empowering artists</h1>
+            <p class="hero__lede">
+              Audiomack is an artist-first music platform that helps musicians
+              reach and engage fans across the world.
+            </p>
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="#">Discover New Music</a>
+              <a class="btn btn--outline" href="#">Upload Your Music</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="stack">
+        <div class="stack__pair">
+          <!-- ==================================================== stats -->
+          <div class="container">
+            <div class="stats">
+              <div class="stat">
+                <div class="stat__value">
+                  <span class="stat__prefix">$</span><span class="stat__num">50M+</span>
+                </div>
+                <p class="stat__label">Paid to Artists</p>
+              </div>
+              <div class="stat">
+                <div class="stat__value"><span class="stat__num">60M+</span></div>
+                <p class="stat__label">Monthly Listeners</p>
+              </div>
+              <div class="stat stat--rank">
+                <div class="stat__value"><span class="stat__num">#1</span></div>
+                <p class="stat__label">App in 20+ Countries</p>
+              </div>
+              <div class="stat">
+                <div class="stat__value"><span class="stat__num">65M+</span></div>
+                <p class="stat__label">Uploads</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================ discovery -->
+          <div class="container">
+            <div class="split">
+              <div class="split__media">
+                <div class="collage">
+                  <div class="collage__col collage__col--a" data-layer="collage-column-0">
+                    <figure><img src="img/collage-1.jpg" alt="" /></figure>
+                    <figure><img src="img/collage-2.jpg" alt="" /></figure>
+                    <figure><img src="img/collage-3.jpg" alt="" /></figure>
+                  </div>
+                  <div class="collage__col collage__col--b" data-layer="collage-column-1">
+                    <figure><img src="img/collage-4.jpg" alt="" /></figure>
+                    <figure><img src="img/collage-5.jpg" alt="" /></figure>
+                  </div>
+                  <div class="collage__fade collage__fade--top" aria-hidden="true"></div>
+                  <div class="collage__fade collage__fade--bottom" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <div class="split__body">
+                <div class="section-copy section-copy--narrow">
+                  <div>
+                    <h2>Music discovery for the next generation</h2>
+                    <p>
+                      Audiomack is a different kind of streaming service. Fans
+                      have easy access to up-next culture.
+                    </p>
+                  </div>
+                  <ul class="bullets">
+                    <li><img src="img/bullet.svg" alt="" /><span>Focus on emerging artists and scenes</span></li>
+                    <li><img src="img/bullet.svg" alt="" /><span>Human curation + recommendation engines</span></li>
+                    <li><img src="img/bullet.svg" alt="" /><span>Offline &amp; unlimited on-demand</span></li>
+                  </ul>
+                  <a class="btn btn--primary" href="#">Discover New Music</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================== playlists -->
+        <section class="section">
+          <div class="container">
+            <div class="section__head">
+              <h2>Audiomack breaks new artists early</h2>
+              <p>Fans come to Audiomack to discover new music before it hits the mainstream.</p>
+            </div>
+          </div>
+
+          <div class="rail">
+            <div class="rail__track">
+              <div class="rail__items">
+                <article class="tile">
+                  <img class="tile__shelf" src="img/tile-shelf.svg" alt="" />
+                  <div class="tile__art"><img src="img/pl-1.jpg" alt="Pop Punk Power" /></div>
+                  <div class="tile__text">
+                    <h3 class="tile__title">Pop Punk Power</h3>
+                    <p class="tile__sub">The biggest and best in hip-hop right now</p>
+                  </div>
+                </article>
+                <article class="tile">
+                  <img class="tile__shelf" src="img/tile-shelf.svg" alt="" />
+                  <div class="tile__art"><img src="img/pl-2.jpg" alt="Pop Punk Power" /></div>
+                  <div class="tile__text">
+                    <h3 class="tile__title">Pop Punk Power</h3>
+                    <p class="tile__sub">The biggest and best in hip-hop right now</p>
+                  </div>
+                </article>
+                <article class="tile">
+                  <img class="tile__shelf" src="img/tile-shelf.svg" alt="" />
+                  <div class="tile__art"><img src="img/pl-3.jpg" alt="Pop Punk Power" /></div>
+                  <div class="tile__text">
+                    <h3 class="tile__title">Pop Punk Power</h3>
+                    <p class="tile__sub">The biggest and best in hip-hop right now</p>
+                  </div>
+                </article>
+                <article class="tile">
+                  <img class="tile__shelf" src="img/tile-shelf.svg" alt="" />
+                  <div class="tile__art"><img src="img/pl-4.jpg" alt="Pop Punk Power" /></div>
+                  <div class="tile__text">
+                    <h3 class="tile__title">Pop Punk Power</h3>
+                    <p class="tile__sub">The biggest and best in hip-hop right now</p>
+                  </div>
+                </article>
+                <article class="tile">
+                  <img class="tile__shelf" src="img/tile-shelf.svg" alt="" />
+                  <div class="tile__art"><img src="img/pl-5.jpg" alt="Pop Punk Power" /></div>
+                  <div class="tile__text">
+                    <h3 class="tile__title">Pop Punk Power</h3>
+                    <p class="tile__sub">The biggest and best in hip-hop right now</p>
+                  </div>
+                </article>
+                <article class="tile">
+                  <img class="tile__shelf" src="img/tile-shelf.svg" alt="" />
+                  <div class="tile__art"><img src="img/pl-1.jpg" alt="Pop Punk Power" /></div>
+                  <div class="tile__text">
+                    <h3 class="tile__title">Pop Punk Power</h3>
+                    <p class="tile__sub">The biggest and best in hip-hop right now</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <a class="btn btn--primary" href="#">Explore Playlists</a>
+        </section>
+
+        <!-- =================================================== creators -->
+        <div class="container">
+          <div class="split">
+            <div class="split__body">
+              <div class="section-copy">
+                <div>
+                  <h2>Creators have full control on Audiomack</h2>
+                  <p>
+                    Audiomack is where you can get your first 100 streams and
+                    build your fanbase to your first 100 million.
+                  </p>
+                </div>
+                <ul class="bullets">
+                  <li>
+                    <img src="img/bullet.svg" alt="" />
+                    <span>Free, unlimited uploads. Upload directly or use one of our hundreds of distribution partners.</span>
+                  </li>
+                  <li><img src="img/bullet.svg" alt="" /><span>Get paid for your streams.</span></li>
+                  <li><img src="img/bullet.svg" alt="" /><span>Get discovered at every stage of your career.</span></li>
+                  <li>
+                    <img src="img/bullet.svg" alt="" />
+                    <span>Manage your music, track your stats, connect with your fans, and do it all with our
+                      <a href="#">FREE Creator App.</a></span>
+                  </li>
+                </ul>
+                <a class="btn btn--primary" href="#">Start Uploading</a>
+              </div>
+            </div>
+
+            <div class="split__media">
+              <div class="dashboard">
+                <div class="panel" style="left:0%; top:0%; width:45.149%; height:48.333%">
+                  <img src="img/panel-a.png" alt="" style="left:13.223%; top:0%; width:70.248%" />
+                </div>
+                <div class="panel" style="left:46.455%; top:0%; width:53.545%; height:48.333%">
+                  <img src="img/panel-b.png" alt="" style="left:7.665%; top:0%; width:92.334%" />
+                  <div class="panel__fade" aria-hidden="true"></div>
+                </div>
+                <div class="panel" style="left:0%; top:50%; width:59.328%; height:50%">
+                  <img src="img/panel-c.png" alt="" style="left:0%; top:0%; width:88.994%" />
+                  <div class="panel__fade" aria-hidden="true"></div>
+                </div>
+                <div class="panel" style="left:60.634%; top:50%; width:46.828%; height:50%">
+                  <img src="img/panel-d.png" alt="" style="left:7.968%; top:6.25%; width:76.096%" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================ testimonial -->
+        <section class="quote">
+          <div class="quote__inner">
+            <img class="quote__bg" src="img/testimonial-collage.jpg" alt="" />
+            <div class="quote__wash" aria-hidden="true"></div>
+            <div class="quote__fade-y" aria-hidden="true"></div>
+            <div class="quote__fade-x" aria-hidden="true"></div>
+
+            <span class="quote__mark quote__mark--open" aria-hidden="true">&ldquo;</span>
+            <span class="quote__mark quote__mark--close" aria-hidden="true">&rdquo;</span>
+
+            <figure class="quote__figure">
+              <blockquote class="quote__text">
+                Audiomack has been riding with me since the beginning. They gave
+                my music a home, a stage, and a real connection to the fans.
+              </blockquote>
+              <figcaption class="quote__by">
+                <img class="quote__avatar" src="img/avatar-bigx.png" alt="" />
+                <div>
+                  <p class="quote__name">BigXthaPlug</p>
+                  <p class="quote__handle">@bigxthaplug</p>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- ====================================================== world -->
+        <section class="section">
+          <div class="container">
+            <div class="section__head">
+              <h2>Audiomack World</h2>
+              <p>
+                A destination for music fans and creators showcasing original
+                content from around the globe
+              </p>
+            </div>
+          </div>
+
+          <div class="rail">
+            <div class="rail__track">
+              <div class="rail__items">
+                <div class="world-card"><img src="img/world-1.jpg" alt="" /></div>
+                <div class="world-card"><img src="img/world-2.jpg" alt="" /></div>
+                <div class="world-card"><img src="img/world-3.jpg" alt="" /></div>
+                <div class="world-card"><img src="img/world-1.jpg" alt="" /></div>
+                <div class="world-card"><img src="img/world-4.jpg" alt="" /></div>
+              </div>
+            </div>
+          </div>
+
+          <a class="btn btn--primary" href="#">Explore Audiomack World</a>
+        </section>
+
+        <!-- =========================================== wordmark + footer -->
+        <div>
+          <div class="wordmark">
+            <img src="img/wordmark-audiomack.svg" alt="Audiomack" />
+          </div>
+
+          <footer class="footer">
+            <div class="footer__inner">
+              <img class="footer__mark" src="img/logo-mark.svg" alt="Audiomack" />
+              <img class="footer__social" src="img/social-icons.svg" alt="Audiomack on social media" />
+
+              <nav class="footer__nav" aria-label="Footer">
+                <a href="#">About</a>
+                <a href="#">Help</a>
+                <a href="#">Business inquiries</a>
+                <a href="#">Media Kit</a>
+                <a href="#">Creator App</a>
+              </nav>
+
+              <div class="badges">
+                <a class="badge" href="#">
+                  <img src="img/badge-mark.svg" alt="" style="width:34px" />
+                  <span>
+                    <span class="badge__eyebrow">Download the</span>
+                    <span class="badge__label">Audiomack App</span>
+                  </span>
+                </a>
+                <a class="badge" href="#">
+                  <img src="img/badge-creator-icon.svg" alt="" style="width:30px" />
+                  <span>
+                    <span class="badge__eyebrow">Download the</span>
+                    <span class="badge__label">Creator App</span>
+                  </span>
+                </a>
+              </div>
+
+              <p class="footer__about">
+                Audiomack is an on-demand music streaming and audio discovery
+                platform that allows artists and creators to upload limitless
+                music and podcasts for listeners through its mobile apps and
+                website.
+              </p>
+
+              <nav class="footer__legal" aria-label="Legal">
+                <a href="#">Legal &amp; DMCA</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Report a Vulnerability</a>
+                <a href="#">Do not sell my info</a>
+              </nav>
+
+              <p class="footer__copyright">© 2025 Audiomack - All Rights Reserved</p>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </main>
+
+    <script src="main.js"></script>
+  </body>
 </html>
