@@ -24,6 +24,28 @@
   window.addEventListener("scroll", onScroll, { passive: true });
 })();
 
+/* Hero artist thumbnails start with the sub text (~1.86s, after the 1.5s hold)
+   — each on its own random beat within a tight window so they don't pop in all
+   at once. These stills will become looping videos later; the motion stays. */
+(function () {
+  "use strict";
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var POP_MS = 0.85; // keep in sync with the hero-pop duration in styles.css
+  var cards = document.querySelectorAll(".hero__card");
+  Array.prototype.forEach.call(cards, function (card) {
+    // pop scatters across a tight ~0.3s window opening as the lede fades in;
+    // the float begins the instant that card's pop finishes, so the movement
+    // starts as soon as the thumbnail is in. A per-card period keeps them from
+    // wandering in unison. Two values map to [hero-pop, hero-float].
+    var pop = 1.86 + Math.random() * 0.3;
+    var floatDur = 6 + Math.random() * 2;
+    card.style.animationDelay = pop.toFixed(2) + "s, " + (pop + POP_MS).toFixed(2) + "s";
+    card.style.animationDuration = POP_MS + "s, " + floatDur.toFixed(2) + "s";
+  });
+})();
+
 /* Playlist rail — drifts left forever, one strip per 60s to match the collage.
    A cloned strip makes the wrap seamless. The drift itself is a Web Animation
    rather than a CSS one so hover can ease the speed down to a near-stop:
