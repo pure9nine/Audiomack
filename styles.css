@@ -397,16 +397,16 @@ a {
   width: 100%;
   max-width: 1440px;
   margin-inline: auto;
-  aspect-ratio: 1440 / 729;
+  aspect-ratio: 1440 / 623;
 }
 
-/* backdrop sits at (23,-7) / 1395x730 within the 1440x729 frame */
+/* backdrop is centred and top-aligned: 1168x610 within the 1440x623 frame */
 .hero__type {
   position: absolute;
-  top: -0.96%;
-  left: 1.597%;
-  width: 96.875%;
-  height: 100.14%;
+  top: 0;
+  left: 9.444%;
+  width: 81.111%;
+  height: 97.913%;
   user-select: none;
   pointer-events: none;
 }
@@ -438,8 +438,8 @@ a {
 
 /* Spacing follows Figma "tag" (16657:14934): title lines 48px apart, 4px from
    the title to the lede (the lede's own margin), 16px from the lede to the
-   buttons (set on .hero__actions). The extra bottom padding biases the centred
-   block a touch above the optical centre, matching the frame's placement. */
+   buttons (set on .hero__actions). The uneven top/bottom padding biases the
+   centred block 6.5px below the optical centre, matching the frame's placement. */
 .hero__copy {
   position: absolute;
   inset: 0;
@@ -449,7 +449,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0;
-  padding: 64px 64px 85px;
+  padding: 70.5px 64px 57.5px;
   text-align: center;
 }
 
@@ -584,19 +584,36 @@ a {
   .hero__title-line,
   .hero__lede,
   .hero__actions,
-  .hero__card {
+  .hero__card,
+  .stats {
     animation: none;
   }
 }
 
 /* ----------------------------------------------------------------- stats */
 
+/* Enters as the final beat of the hero cascade — a gentle rise + fade landing
+   just after the backdrop graphic (.hero__type, which starts at 1.5s) has come
+   in. main.js hangs the number count-up off this animation's start, so the two
+   stay in sync if the timing is ever retuned. */
 .stats {
   display: flex;
   align-items: center;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: var(--surface);
+  animation: stats-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.1s both;
+}
+
+@keyframes stats-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .stat {

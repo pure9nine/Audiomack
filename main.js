@@ -138,6 +138,70 @@
   window.addEventListener("scroll", onScroll, { passive: true });
 })();
 
+/* Stat numbers count up from zero as the stats block reveals. The reveal itself
+   (the rise + fade) is the CSS `stats-in` animation; we start the count off the
+   same delay — read straight from the computed style — so the two stay locked
+   together however that timing is tuned in the stylesheet.
+
+   Each value keeps whatever wraps its digits — the "M+", the "#" on the rank —
+   by splitting the text into a leading non-digit prefix, the integer, and the
+   rest. Under reduced-motion we bail out entirely: the CSS reveal is off and the
+   numbers simply stand at their final values from the markup. */
+(function () {
+  "use strict";
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!window.requestAnimationFrame) return;
+
+  var stats = document.querySelector(".stats");
+  if (!stats) return;
+
+  var DURATION = 1200; // ms to run from zero to the final value
+
+  var nums = Array.prototype.map
+    .call(stats.querySelectorAll(".stat__num"), function (el) {
+      var parts = /^(\D*)(\d+)(.*)$/.exec(el.textContent);
+      if (!parts) return null;
+      return {
+        el: el,
+        prefix: parts[1],
+        target: parseInt(parts[2], 10),
+        suffix: parts[3],
+      };
+    })
+    .filter(Boolean);
+
+  if (!nums.length) return;
+
+  function render(n, value) {
+    n.el.textContent = n.prefix + value + n.suffix;
+  }
+
+  function run() {
+    var begin = null;
+
+    function step(now) {
+      if (begin === null) begin = now;
+      var t = Math.min((now - begin) / DURATION, 1);
+      var eased = 1 - Math.pow(1 - t, 3); // easeOutCubic — quick, then settles
+      nums.forEach(function (n) {
+        render(n, Math.round(n.target * eased));
+      });
+      if (t < 1) window.requestAnimationFrame(step);
+    }
+
+    window.requestAnimationFrame(step);
+  }
+
+  // Match the reveal's own delay (e.g. "2.1s") so the count starts as the block
+  // arrives, not before. Hold the digits at zero through the wait.
+  var delay = parseFloat(getComputedStyle(stats).animationDelay) || 0;
+  nums.forEach(function (n) {
+    render(n, 0);
+  });
+  window.setTimeout(run, delay * 1000);
+})();
+
 /* Playlist rail — drifts left forever, one strip per 60s to match the collage.
    A cloned strip makes the wrap seamless. The drift itself is a Web Animation
    rather than a CSS one so hover can ease the speed down to a near-stop:
