@@ -1189,7 +1189,7 @@ a {
    quote, main.js adds .is-primed, so it only ever starts dimmed when there's
    script around to bring it back up. */
 .wordmark.is-primed {
-  opacity: 0.2;
+  opacity: 0.1;
   transform: translateY(40px);
   transition: opacity 0.8s ease,
     transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
