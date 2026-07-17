@@ -32,18 +32,110 @@
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  var POP_MS = 0.85; // keep in sync with the hero-pop duration in styles.css
   var cards = document.querySelectorAll(".hero__card");
   Array.prototype.forEach.call(cards, function (card) {
-    // pop scatters across a tight ~0.3s window opening as the lede fades in;
-    // the float begins the instant that card's pop finishes, so the movement
-    // starts as soon as the thumbnail is in. A per-card period keeps them from
-    // wandering in unison. Two values map to [hero-pop, hero-float].
-    var pop = 1.86 + Math.random() * 0.3;
-    var floatDur = 6 + Math.random() * 2;
-    card.style.animationDelay = pop.toFixed(2) + "s, " + (pop + POP_MS).toFixed(2) + "s";
-    card.style.animationDuration = POP_MS + "s, " + floatDur.toFixed(2) + "s";
+    // scatter the pop across a tight ~0.3s window opening as the lede fades in
+    card.style.animationDelay = (1.86 + Math.random() * 0.3).toFixed(2) + "s";
   });
+})();
+
+/* Sections that reveal as they scroll into view — the quote fades up (its thumb
+   and name a beat behind), the wordmark comes from half strength to full. The
+   fades and their stagger live in the stylesheet; this only says when.
+
+   Priming from here means a section only ever starts hidden or dimmed when
+   there's script around to bring it back. Thresholds are per-section: enough of
+   each on screen that the thing being revealed has actually arrived before it
+   starts. `once` decides whether it stays revealed or resets on the way back. */
+(function () {
+  "use strict";
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!("IntersectionObserver" in window)) return;
+
+  var targets = [
+    // the quote runs to ~62% of its section's height, so anything lower leaves
+    // it hugging the bottom edge and the fade plays half unseen
+    { selector: ".quote", threshold: 0.65, once: true },
+    // the wordmark plays both ways — scrolling back up sinks it again
+    { selector: ".wordmark", threshold: 0.6, once: false },
+  ];
+
+  // Extra stops on either side of the trigger. The callback only fires when a
+  // listed threshold is crossed, so without them a crossing that samples a hair
+  // under its own threshold would stick; the next stop corrects it either way.
+  function stopsFor(threshold) {
+    var stops = [0, 0.25, 0.5, 0.75, 1];
+    if (stops.indexOf(threshold) === -1) stops.push(threshold);
+    return stops.sort(function (a, b) {
+      return a - b;
+    });
+  }
+
+  targets.forEach(function (target) {
+    var el = document.querySelector(target.selector);
+    if (!el) return;
+
+    el.classList.add("is-primed");
+
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          // isIntersecting flips true on the first sliver, so go by how much of
+          // the section is actually on screen instead.
+          if (entry.intersectionRatio >= target.threshold) {
+            entry.target.classList.add("is-in");
+            if (target.once) io.unobserve(entry.target);
+          } else if (!target.once) {
+            entry.target.classList.remove("is-in");
+          }
+        });
+      },
+      { threshold: stopsFor(target.threshold) }
+    );
+
+    io.observe(el);
+  });
+})();
+
+/* Hero artist thumbnails drift as the page scrolls, each at a rate set by its
+   data-depth, so the nearer cards trail further behind the scroll than the far
+   ones and the group reads with a bit of depth. Written to `translate` rather
+   than `transform`: hero-pop owns `scale`, and the two individual properties
+   compose, so the drift never fights the pop-in. */
+(function () {
+  "use strict";
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var RATE = 0.12; // fraction of the scroll a depth-1 card lags behind by
+  var cards = document.querySelectorAll(".hero__card");
+  if (!cards.length) return;
+
+  var depths = Array.prototype.map.call(cards, function (card) {
+    return parseFloat(card.getAttribute("data-depth")) || 0.5;
+  });
+
+  var ticking = false;
+
+  function update() {
+    // Only the hero parallaxes, so stop once it has scrolled away — past that
+    // the offset is off-screen work nobody sees.
+    var y = Math.min(window.scrollY, window.innerHeight);
+    Array.prototype.forEach.call(cards, function (card, i) {
+      card.style.translate = "0 " + (y * depths[i] * RATE).toFixed(1) + "px";
+    });
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }
+
+  update();
+  window.addEventListener("scroll", onScroll, { passive: true });
 })();
 
 /* Playlist rail — drifts left forever, one strip per 60s to match the collage.

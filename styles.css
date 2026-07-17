@@ -155,12 +155,15 @@ a {
 
 /* ------------------------------------------------------------------- nav */
 
+/* The bar fades in just ahead of the hero backdrop, landing as that starts at
+   1.5s — see the hero load-in block for the rest of the sequence. */
 .nav {
   position: sticky;
   top: 0;
   z-index: 50;
   width: 100%;
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  animation: hero-fade 0.5s ease 1s both;
 }
 
 /* toggled from main.js once the page scrolls */
@@ -561,40 +564,22 @@ a {
   }
 }
 
+/* animates `scale` rather than `transform` so the scroll parallax in main.js
+   can own `translate` on the same element without the two clobbering each other */
 @keyframes hero-pop {
   from {
     opacity: 0;
-    transform: scale(0.8);
+    scale: 0.8;
   }
   to {
     opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* endless hover once a thumbnail has popped in — it wanders around a small
-   loop with a little tilt; rests at identity (0%/100%) so it never drifts off
-   position and hands off cleanly from the pop */
-@keyframes hero-float {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate(10px, -11px) rotate(1deg);
-  }
-  50% {
-    transform: translate(-7px, -16px) rotate(-1.1deg);
-  }
-  75% {
-    transform: translate(-11px, -5px) rotate(0.7deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(0deg);
+    scale: 1;
   }
 }
 
 /* honour reduced-motion: show everything in place, no fade, slide, or zoom */
 @media (prefers-reduced-motion: reduce) {
+  .nav,
   .hero__type,
   .hero__title-line,
   .hero__lede,
@@ -1151,11 +1136,55 @@ a {
   letter-spacing: -0.5px;
 }
 
+/* ---- quote reveal ---------------------------------------------------------
+   The quote and its marks fade up as the section scrolls into view, with the
+   byline a beat behind. main.js adds .is-primed, so the copy is only ever
+   hidden when there's script around to reveal it again — no JS, no blank quote. */
+.quote.is-primed .quote__mark,
+.quote.is-primed .quote__text,
+.quote.is-primed .quote__by {
+  opacity: 0;
+  /* the held beat lets the section settle into view before anything moves */
+  transition: opacity 0.8s ease 0.25s;
+}
+
+/* the thumb and name trail the quote itself */
+.quote.is-primed .quote__by {
+  transition-delay: 0.6s;
+}
+
+.quote.is-primed.is-in .quote__mark,
+.quote.is-primed.is-in .quote__text,
+.quote.is-primed.is-in .quote__by {
+  opacity: 1;
+}
+
 /* -------------------------------------------------- wordmark and footer */
 
 .wordmark {
   width: 100%;
   padding-inline: 16px;
+}
+
+/* ---- wordmark reveal ------------------------------------------------------
+   It sits dimmed and a little low until it scrolls into view, then rises into
+   place at full strength — and sinks back again on the way up. As with the
+   quote, main.js adds .is-primed, so it only ever starts dimmed when there's
+   script around to bring it back up. */
+.wordmark.is-primed {
+  opacity: 0.2;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The held beat belongs to the way in only: this rule is what's in effect while
+   revealing, and the plain rule above governs the trip back, so scrolling up
+   sinks it right away instead of lagging behind the scroll. */
+.wordmark.is-primed.is-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
 }
 
 .wordmark img {
