@@ -1341,6 +1341,122 @@ a {
   letter-spacing: -0.5px;
 }
 
+/* ------------------------------------------------------- inner page */
+
+/* The whole page fades in together on load; the nav rides this fade rather than
+   its own homepage delay (see the override below), so the bar and the content
+   arrive as one. The hero title section then plays its own cascade on top. */
+.inner-page {
+  animation: hero-fade 0.6s ease 0.3s both;
+}
+
+.inner-page .nav {
+  animation: none;
+}
+
+/* ------------------------------------------------------- inner hero */
+
+/* Frame "Text" (16674:38376): a centred heading + lede + CTA over a full-bleed
+   topographic wave-line backdrop. The SVG carries its own #0d0d0d fades on the
+   left and right (~200px each), so it runs edge to edge and dissolves into the
+   page — no hard cut, whatever the window width. */
+.inner-hero {
+  position: relative;
+  padding: 88px var(--gutter) 72px;
+  overflow: hidden;
+}
+
+/* fills the hero exactly; preserveAspectRatio="none" in the SVG lets it stretch */
+.inner-hero__lines {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.inner-hero__lines img {
+  width: 100%;
+  height: 100%;
+}
+
+/* the copy holds to the 1440 content frame even though the lines run full width */
+.inner-hero__copy {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.inner-hero__title {
+  margin: 0;
+  max-width: 666px;
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.85);
+}
+
+.inner-hero__lede {
+  margin: 0;
+  max-width: 512px;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.4;
+  letter-spacing: -0.5px;
+}
+
+/* ---- inner-hero load-in ---------------------------------------------------
+   The backdrop lines arrive with the page fade above; then the two title lines
+   rise and the lede + button fade up a beat behind. */
+.inner-hero__title-line {
+  display: block;
+  animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.inner-hero__title-line:nth-child(1) {
+  animation-delay: 1.1s;
+}
+.inner-hero__title-line:nth-child(2) {
+  animation-delay: 1.22s;
+}
+
+.inner-hero__lede,
+.inner-hero .btn {
+  animation: hero-fade 0.7s ease both;
+}
+.inner-hero__lede {
+  animation-delay: 1.34s;
+}
+.inner-hero .btn {
+  animation-delay: 1.46s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner-page,
+  .inner-hero__title-line,
+  .inner-hero__lede,
+  .inner-hero .btn {
+    animation: none;
+  }
+}
+
+/* the inner-page media slot: a plain black panel (Figma 16678:48129) in place
+   of the homepage's drifting collage, same 536x480 footprint */
+.media-box {
+  width: 100%;
+  aspect-ratio: 536 / 480;
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
 /* --------------------------------------------------------------- layout */
 
 .stack {
@@ -1488,6 +1604,27 @@ a {
 
   .hero__actions .btn--outline {
     padding-block: 10px;
+  }
+
+  /* ---------------------------------------------------------- inner hero */
+
+  .inner-hero {
+    padding: 40px var(--gutter) 48px;
+  }
+
+  .inner-hero__title {
+    font-size: 32px;
+    letter-spacing: -0.8px;
+  }
+
+  .inner-hero__lede {
+    max-width: 300px;
+    font-size: 15px;
+  }
+
+  /* fills the shorter mobile hero exactly, same as desktop */
+  .inner-hero__lines {
+    inset: 0;
   }
 
   /* --------------------------------------------------------------- stats */
