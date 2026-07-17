@@ -1076,27 +1076,11 @@ a {
   );
 }
 
+/* a single gradient quote mark centred above the text (Figma 16742:20261) */
 .quote__mark {
-  position: absolute;
-  font-family: var(--font-display);
-  font-size: 120px;
-  font-weight: 700;
-  line-height: 1;
-  background-image: var(--brand-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  width: 45px;
+  height: 37px;
   user-select: none;
-}
-
-.quote__mark--open {
-  top: 25%;
-  left: 17.9%;
-}
-
-.quote__mark--close {
-  top: 56.7%;
-  left: 68.9%;
 }
 
 .quote__figure {
@@ -1782,23 +1766,6 @@ a {
 
   .quote__text {
     font-size: 32px;
-  }
-
-  /* The mark moves into the flow above the quote; the closing one is dropped.
-     line-height stays at 1 so the gradient's box still covers the glyph
-     (background-clip:text paints nothing outside it) — the empty space the
-     full line box brings with it is clawed back with negative margins. */
-  .quote__mark--open {
-    position: relative;
-    top: auto;
-    left: auto;
-    z-index: 10;
-    margin-block: -30px -51px;
-    line-height: 1;
-  }
-
-  .quote__mark--close {
-    display: none;
   }
 
   .quote__avatar {
