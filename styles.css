@@ -535,6 +535,21 @@ a {
   animation: hero-pop 0.85s cubic-bezier(0.22, 1, 0.36, 1) 1.86s both;
 }
 
+/* main.js hangs `is-holding` on <html> while the card videos buffer, parking
+   the whole entrance — nav included — at its hidden first frame so the cards
+   never arrive as stills that start moving a beat later. On release the time
+   spent holding is credited against these delays (up to the 1.5s hold), so
+   the wait runs inside the designed pause, not after it. The class only ever
+   comes from script, so a no-JS load plays the cascade on its usual clock. */
+.is-holding .nav,
+.is-holding .hero__type,
+.is-holding .hero__title-line,
+.is-holding .hero__lede,
+.is-holding .hero__actions,
+.is-holding .hero__card {
+  animation-play-state: paused;
+}
+
 @keyframes hero-fade {
   from {
     opacity: 0;

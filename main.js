@@ -44,7 +44,19 @@
    alone is not honoured by every browser, and a rejected play is just the
    poster showing, not an error worth surfacing. Pages loaded in a background
    tab get their video-only media paused to save power, so playback is kicked
-   again whenever the tab comes to the front. */
+   again whenever the tab comes to the front.
+
+   The entrance cascade is also parked (`.is-holding`, see the stylesheet)
+   until every video has buffered enough to play through, so the reveal never
+   shows a card that hasn't started moving. A hard cap keeps a stalled network
+   from holding the page hostage, and a video that errors counts as done —
+   its poster is the best it will ever show. Nothing is held when the cards
+   aren't on show (mobile drops them).
+
+   The wait and the cascade's built-in 1.5s hold run on the same clock: time
+   spent holding is credited against each entrance delay on release, up to
+   that 1.5s share, so a slow network eats the designed pause before it adds
+   any of its own. */
 (function () {
   "use strict";
 
@@ -71,6 +83,63 @@
   });
 
   playAll();
+
+  var cards = document.querySelector(".hero__cards");
+  if (!cards || getComputedStyle(cards).display === "none") return;
+
+  var HOLD_CAP_MS = 4000;
+  var HOLD_SHARE_S = 1.5; // the cascade's own pre-entrance hold, from the CSS
+  var root = document.documentElement;
+  var waiting = videos.length;
+  var heldAt = performance.now();
+  var released = false;
+
+  root.classList.add("is-holding");
+
+  function release() {
+    if (released) return;
+    released = true;
+
+    // Credit the time already spent holding against each entrance delay, so
+    // the video wait eats the designed 1.5s pause before adding any of its
+    // own. A negative delay just starts an animation partway in — the nav,
+    // due earliest, arrives mid-fade or already settled.
+    var credit = Math.min((performance.now() - heldAt) / 1000, HOLD_SHARE_S);
+    if (credit > 0.05) {
+      var held = document.querySelectorAll(
+        ".nav, .hero__type, .hero__title-line, .hero__lede, .hero__actions, .hero__card"
+      );
+      Array.prototype.forEach.call(held, function (el) {
+        var delay = parseFloat(getComputedStyle(el).animationDelay) || 0;
+        el.style.animationDelay = (delay - credit).toFixed(2) + "s";
+      });
+    }
+
+    root.classList.remove("is-holding");
+  }
+
+  function done() {
+    waiting -= 1;
+    if (waiting === 0) release();
+  }
+
+  Array.prototype.forEach.call(videos, function (video) {
+    // HAVE_ENOUGH_DATA already — small files often land before this runs
+    if (video.readyState >= 4) {
+      done();
+      return;
+    }
+    var settled = false;
+    function onSettled() {
+      if (settled) return;
+      settled = true;
+      done();
+    }
+    video.addEventListener("canplaythrough", onSettled);
+    video.addEventListener("error", onSettled);
+  });
+
+  window.setTimeout(release, HOLD_CAP_MS);
 })();
 
 /* Sections that reveal as they scroll into view — the quote fades up (its thumb
