@@ -39,6 +39,40 @@
   });
 })();
 
+/* Hero card videos: under reduced-motion they hold their poster frame instead
+   of looping, and elsewhere play() is called by hand — the autoplay attribute
+   alone is not honoured by every browser, and a rejected play is just the
+   poster showing, not an error worth surfacing. Pages loaded in a background
+   tab get their video-only media paused to save power, so playback is kicked
+   again whenever the tab comes to the front. */
+(function () {
+  "use strict";
+
+  var videos = document.querySelectorAll(".hero__card video");
+  if (!videos.length) return;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    Array.prototype.forEach.call(videos, function (video) {
+      video.removeAttribute("autoplay");
+      video.pause();
+    });
+    return;
+  }
+
+  function playAll() {
+    Array.prototype.forEach.call(videos, function (video) {
+      var playing = video.play();
+      if (playing && playing.catch) playing.catch(function () {});
+    });
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") playAll();
+  });
+
+  playAll();
+})();
+
 /* Sections that reveal as they scroll into view — the quote fades up (its thumb
    and name a beat behind), the wordmark comes from half strength to full. The
    fades and their stagger live in the stylesheet; this only says when.
