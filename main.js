@@ -296,13 +296,44 @@
     window.requestAnimationFrame(step);
   }
 
-  // Match the reveal's own delay (e.g. "2.1s") so the count starts as the block
-  // arrives, not before. Hold the digits at zero through the wait.
-  var delay = parseFloat(getComputedStyle(stats).animationDelay) || 0;
+  // Hold the digits at zero, then match the reveal's own delay (e.g. "2.1s")
+  // so the count starts as the block arrives, not before.
   nums.forEach(function (n) {
     render(n, 0);
   });
-  window.setTimeout(run, delay * 1000);
+
+  function start() {
+    var delay = parseFloat(getComputedStyle(stats).animationDelay) || 0;
+    window.setTimeout(run, delay * 1000);
+  }
+
+  // Nothing runs until the block is actually on screen: the CSS reveal is
+  // frozen by .stats--hold and released here, with the count hung off the same
+  // moment. Visible at load (desktop) keeps the full hero-cascade delay; a
+  // scroll-reveal (small screens, stats below the fold) trims it to a beat so
+  // the block isn't sitting frozen 2.1s after the user reaches it.
+  if (!("IntersectionObserver" in window)) {
+    start();
+    return;
+  }
+
+  stats.classList.add("stats--hold");
+
+  var firstLook = true;
+  var io = new IntersectionObserver(
+    function (entries) {
+      if (!entries[0].isIntersecting) {
+        firstLook = false;
+        return;
+      }
+      io.disconnect();
+      if (!firstLook) stats.style.animationDelay = "0.15s";
+      stats.classList.remove("stats--hold");
+      start();
+    },
+    { threshold: 0.3 }
+  );
+  io.observe(stats);
 })();
 
 /* Playlist rail — drifts left forever, one strip per 60s to match the collage.

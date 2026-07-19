@@ -633,6 +633,14 @@ a {
   }
 }
 
+/* main.js holds the reveal here until the block actually scrolls into view,
+   then releases it. Pausing also freezes the animation-delay countdown, so the
+   cascade timing survives intact when the block is visible from the start.
+   Without JS the class is never added and the reveal runs on its own. */
+.stats--hold {
+  animation-play-state: paused;
+}
+
 .stat {
   position: relative;
   flex: 1 0 0;
