@@ -666,39 +666,42 @@ a {
 
 .stat__value {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
+  gap: 4px;
   font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.2;
-  background-image: var(--brand-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 .stat__num {
   font-size: 56px;
   letter-spacing: -1.5px;
   white-space: nowrap;
-}
-
-/* the "$" is set smaller and sits on the baseline of the number */
-.stat__prefix {
-  font-size: 40px;
-  letter-spacing: -1.5px;
-  padding-bottom: 0.25em;
+  background-image: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .stat--rank .stat__num {
   letter-spacing: 4px;
 }
 
+/* inline label next to the "#1" mark */
+.stat__rank-label {
+  font-size: 20px;
+  line-height: 1.1;
+  letter-spacing: -0.8px;
+  color: #fb8d23;
+  text-align: left;
+}
+
 .stat__label {
   margin: 0;
   font-size: 20px;
   font-weight: 600;
-  line-height: 1.6;
+  line-height: 1.3;
   letter-spacing: -0.8px;
 }
 
@@ -1704,12 +1707,12 @@ a {
     letter-spacing: -1px;
   }
 
-  .stat__prefix {
-    font-size: 24px;
-  }
-
   .stat--rank .stat__num {
     letter-spacing: 2px;
+  }
+
+  .stat__rank-label {
+    font-size: 16px;
   }
 
   /* narrow enough to break every label onto two lines, as drawn */
