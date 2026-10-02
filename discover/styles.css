@@ -138,6 +138,13 @@ h3 {
   transform: translate(-50%, -50%);
   isolation: isolate;
   pointer-events: none;
+  /* Feather the outer 8px so a browser's video colour handling can't leave a hard square edge. */
+  -webkit-mask: linear-gradient(to right, transparent, #000 8px, #000 calc(100% - 8px), transparent),
+    linear-gradient(to bottom, transparent, #000 8px, #000 calc(100% - 8px), transparent);
+  -webkit-mask-composite: source-in;
+  mask: linear-gradient(to right, transparent, #000 8px, #000 calc(100% - 8px), transparent),
+    linear-gradient(to bottom, transparent, #000 8px, #000 calc(100% - 8px), transparent);
+  mask-composite: intersect;
 }
 
 .loader__video {
