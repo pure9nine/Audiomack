@@ -110,64 +110,47 @@ h3 {
 
 /* ------------------------------------------------------------------ loader */
 
-/* Splash (Figma AM-Loader, 44491:3033) held over the screen, then faded away
-   to reveal Discover. Pure CSS so it can never get stuck. The header sits
-   above it so the status bar — identical on both screens — never blinks; the
-   rest of the header fades in with the content. */
+/* Splash (Figma AM-Loader, 44491:3033) held over the screen. After the hold
+   the clip fades out, then the loader fades away to reveal Discover. Pure CSS
+   so it can never get stuck. The header sits above it so the status bar —
+   identical on both screens — never blinks; the rest of the header fades in
+   with the content. */
 :root {
-  --loader-hold: 3s;
-  --loader-fade: 700ms;
+  --loader-hold: 3s; /* clip plays */
+  --loader-video-fade: 500ms; /* clip fades out */
+  --loader-fade: 700ms; /* then Discover fades in */
+  --loader-reveal-at: calc(var(--loader-hold) + var(--loader-video-fade));
 }
 
 .loader {
   position: absolute;
   inset: 0;
   z-index: 11; /* over the scroll + dock, under the header */
-  background: #0a0a0a; /* loader only — Discover itself stays var(--bg) #0d0d0d */
-  animation: loader-out var(--loader-fade) ease var(--loader-hold) forwards;
+  background: var(--bg); /* matches the clip's own #0d0d0d */
+  animation: loader-out var(--loader-fade) ease var(--loader-reveal-at) forwards;
 }
 
 /* Glitch-logo clip (Figma 44609:3015): 160×160 at x 108 / y 326 — centred, nudged ½px right.
    The source is 320×320 for 2× screens and runs the full 3s hold. */
-.loader__clip {
+.loader__video {
   position: absolute;
   left: calc(50% + 0.5px);
   top: 50%;
   width: 160px;
   height: 160px;
-  transform: translate(-50%, -50%);
-  isolation: isolate;
-  pointer-events: none;
-  /* Feather the outer 8px so a browser's video colour handling can't leave a hard square edge. */
-  -webkit-mask: linear-gradient(to right, transparent, #000 8px, #000 calc(100% - 8px), transparent),
-    linear-gradient(to bottom, transparent, #000 8px, #000 calc(100% - 8px), transparent);
-  -webkit-mask-composite: source-in;
-  mask: linear-gradient(to right, transparent, #000 8px, #000 calc(100% - 8px), transparent),
-    linear-gradient(to bottom, transparent, #000 8px, #000 calc(100% - 8px), transparent);
-  mask-composite: intersect;
-}
-
-.loader__video {
-  display: block;
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-}
-
-/* The clip's background is baked in at #0d0d0d. Differencing it with rgb(3,3,3)
-   subtracts 3 from every channel, landing that background exactly on the
-   loader's #0a0a0a — too small a shift to show in the logo. Drop this if the
-   clip is re-exported on #0a0a0a. */
-.loader__clip::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgb(3, 3, 3);
-  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  /* Safari renders this clip's #0d0d0d backdrop darker (#0a0a0a) than Chrome
+     does. "lighten" keeps whichever is brighter per pixel, so the near-black
+     backdrop always lands exactly on the loader's #0d0d0d while the logo,
+     far brighter, is untouched. */
+  mix-blend-mode: lighten;
+  animation: loader-out var(--loader-video-fade) ease var(--loader-hold) forwards;
 }
 
 .titlebar {
-  animation: loader-reveal var(--loader-fade) ease var(--loader-hold) both;
+  animation: loader-reveal var(--loader-fade) ease var(--loader-reveal-at) both;
 }
 
 /* Keep the content hidden (not just covered) during the hold — when the phone
@@ -175,7 +158,7 @@ h3 {
    visibility, not opacity, so the tab bar's backdrop blur is untouched. */
 .scroll,
 .dock {
-  animation: loader-show 0s linear var(--loader-hold) both;
+  animation: loader-show 0s linear var(--loader-reveal-at) both;
 }
 
 @keyframes loader-show {
@@ -199,6 +182,7 @@ h3 {
 
 @media (prefers-reduced-motion: reduce) {
   :root {
+    --loader-video-fade: 1ms;
     --loader-fade: 1ms;
   }
 }
