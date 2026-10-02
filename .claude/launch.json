@@ -6,6 +6,15 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "4173"],
       "port": 4173
+    },
+    {
+      "name": "audiomack-node",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "-e",
+        "const h=require('http'),f=require('fs'),p=require('path'),t={'.html':'text/html','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.woff2':'font/woff2','.mp4':'video/mp4'};h.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);let fp=p.join(process.cwd(),u);if(u.endsWith('/'))fp=p.join(fp,'index.html');f.readFile(fp,(e,d)=>{if(e){r.writeHead(404);return r.end('not found')}r.writeHead(200,{'Content-Type':t[p.extname(fp)]||'application/octet-stream'});r.end(d)})}).listen(4174,()=>console.log('http://localhost:4174'))"
+      ],
+      "port": 4174
     }
   ]
 }

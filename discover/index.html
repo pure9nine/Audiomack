@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#000000" />
+    <title>Audiomack — Discover</title>
+    <link rel="icon" href="img/logo-mark.svg" type="image/svg+xml" />
+    <link rel="preload" href="fonts/opensans-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="screen" id="screen">
+      <!-- ============================================================ scroll -->
+      <div class="scroll" id="scroll">
+        <div class="top-blur" aria-hidden="true">
+          <img src="img/top-blur.png" alt="" />
+        </div>
+
+        <main class="content">
+          <!-- ======================================================== upsell -->
+          <aside class="upsell" id="upsell">
+            <div class="upsell__img">
+              <img src="img/upsell-ayanne.jpg" alt="" />
+            </div>
+            <p class="upsell__text">
+              You Need To Hear Ayanne - the rising Ivorian star who defies genres with an eclectic sound
+            </p>
+            <button class="upsell__close" type="button" aria-label="Dismiss" data-dismiss="upsell">
+              <img src="img/icon-x.svg" width="16" height="16" alt="" />
+            </button>
+          </aside>
+
+          <!-- ======================================================= filters -->
+          <nav class="filters hscroll" aria-label="Genres">
+            <button class="filter is-active" type="button" aria-pressed="true">All</button>
+            <button class="filter" type="button" aria-pressed="false">Hip-Hop</button>
+            <button class="filter" type="button" aria-pressed="false">Afrosounds</button>
+            <button class="filter" type="button" aria-pressed="false">R&amp;B</button>
+            <button class="filter" type="button" aria-pressed="false">Electronic</button>
+          </nav>
+
+          <!-- ====================================================== for you -->
+          <section class="section" aria-label="For you">
+            <div class="carousel hscroll" id="carousel">
+              <article class="foryou">
+                <header class="foryou__head">
+                  <h2 class="foryou__title">Find Something New</h2>
+                  <a href="#" aria-label="See all"><img src="img/icon-chevron.svg" width="14.1421" height="14.1421" alt="" /></a>
+                </header>
+                <ul class="foryou__list">
+                  <li class="foryou-item">
+                    <div class="foryou-item__main">
+                      <div class="art art--64"><img src="img/art-new-1.jpg" alt="" /></div>
+                      <div class="foryou-item__copy foryou-item__copy--pair">
+                        <p class="t-bold">Quavo, Teddy Swims, Luk...</p>
+                        <p class="t-muted">Georgia Ways</p>
+                      </div>
+                    </div>
+                    <button class="kabob" type="button" aria-label="More"><img src="img/icon-kabob.svg" width="16" height="4" alt="" /></button>
+                  </li>
+                  <li class="foryou-item">
+                    <div class="foryou-item__main">
+                      <div class="art art--64"><img src="img/art-new-2.jpg" alt="" /></div>
+                      <div class="foryou-item__copy">
+                        <p class="t-bold">Rayvanny</p>
+                        <p class="t-muted">Sensema</p>
+                        <p class="feat"><span class="feat__label">Feat<span>.</span></span><span>Harmonize</span></p>
+                      </div>
+                    </div>
+                    <button class="kabob" type="button" aria-label="More"><img src="img/icon-kabob.svg" width="16" height="4" alt="" /></button>
+                  </li>
+                  <li class="foryou-item">
+                    <div class="foryou-item__main">
+                      <div class="art art--64"><img src="img/art-new-3.jpg" alt="" /></div>
+                      <div class="foryou-item__copy foryou-item__copy--pair">
+                        <p class="t-bold">Sabrina Carpenter</p>
+                        <p class="t-muted">Espresso</p>
+                      </div>
+                    </div>
+                    <button class="kabob" type="button" aria-label="More"><img src="img/icon-kabob.svg" width="16" height="4" alt="" /></button>
+                  </li>
+                  <li class="foryou-item">
+                    <div class="foryou-item__main">
+                      <div class="art art--64"><img src="img/art-new-4.jpg" alt="" /></div>
+                      <div class="foryou-item__copy">
+                        <p class="t-bold">Jo Vibe</p>
+                        <p class="t-muted">Jo Blaq</p>
+                        <p class="feat"><span class="feat__label">Feat<span>.</span></span><span>Zinoleesky</span></p>
+                      </div>
+                    </div>
+                    <button class="kabob" type="button" aria-label="More"><img src="img/icon-kabob.svg" width="16" height="4" alt="" /></button>
+                  </li>
+                </ul>
+              </article>
+
+              <article class="foryou">
+                <header class="foryou__head">
+                  <h2 class="foryou__title">Back to Your Favorites</h2>
+                  <a href="#" aria-label="See all"><img src="img/icon-chevron.svg" width="14.1421" height="14.1421" alt="" /></a>
+                </header>
+                <ul class="foryou__list">
+                  <li class="foryou-item">
+                    <div class="foryou-item__main">
+                      <div class="art art--64"><img src="img/art-fav-1.png" alt="" /></div>
+                      <div class="foryou-item__copy foryou-item__copy--pair">
+                        <p class="t-bold">Georgia Ways</p>
+                        <p class="t-muted">Quavo, Teddy Swims, Luke Br...</p>
+                      </div>
+                    </div>
+                    <button class="kabob" type="button" aria-label="More"><img src="img/icon-kabob.svg" width="16" height="4" alt="" /></button>
+                  </li>
+                  <li class="foryou-item">
+                    <div class="foryou-item__main">
+                      <div class="art art--64"><img src="img/art-fav-2.png" alt="" /></div>
+                      <div class="foryou-item__copy">
+                        <p class="t-bold">Sensema</p>
+                        <p class="t-muted">Rayvanny</p>
+                        <p class="feat"><span class="feat__label">Feat<span>.</span></span><span>Yella Beezy</span></p>
+                      </div>
+                    </div>
+                    <button class="kabob" type="button" aria-label="More"><img src="img/icon-kabob.svg" width="16" height="4" alt="" /></button>
+                  </li>
+                  <li class="foryou-item">
+                    <div class="foryou-item__main">
+                      <div class="art art--64"><img src="img/art-fav-3.png" alt="" /></div>
+                      <div class="foryou-item__copy foryou-item__copy--pair">
+                        <p class="t-bold">Espresso</p>
+                        <p class="t-muted">Sabrina Carpenter</p>
+                      </div>
+                    </div>
+                    <button class="kabob" type="button" aria-label="More"><img src="img/icon-kabob.svg" width="16" height="4" alt="" /></button>
+                  </li>
+                  <li class="foryou-item">
+                    <div class="foryou-item__main">
+                      <div class="art art--64"><img src="img/art-new-4.jpg" alt="" /></div>
+                      <div class="foryou-item__copy">
+                        <p class="t-bold">Jo Blaq</p>
+                        <p class="t-muted">Jo Vibe</p>
+                        <p class="feat"><span class="feat__label">Feat<span>.</span></span><span>Zinoleesky</span></p>
+                      </div>
+                    </div>
+                    <button class="kabob" type="button" aria-label="More"><img src="img/icon-kabob.svg" width="16" height="4" alt="" /></button>
+                  </li>
+                </ul>
+              </article>
+            </div>
+            <div class="dots" id="carousel-dots" role="tablist" aria-label="Slides">
+              <button type="button" aria-label="Slide 1" aria-current="true"></button>
+              <button type="button" aria-label="Slide 2" aria-current="false"></button>
+            </div>
+          </section>
+
+          <!-- ===================================================== playlists -->
+          <section class="section">
+            <header class="module-head">
+              <h2 class="module-head__title">Playlists for you</h2>
+              <a class="module-head__more" href="#" aria-label="See all"><img src="img/icon-header-arrow.svg" width="10" height="10" alt="" /></a>
+            </header>
+            <ul class="grid">
+              <li class="tile">
+                <img class="tile__shelf" src="img/tile-shelf.svg" width="140" height="8" alt="" />
+                <div class="art"><img src="img/pl-1.jpg" alt="" /></div>
+                <h3 class="tile__title">Freshly Minter</h3>
+                <p class="tile__desc">A collection of EDM/House/Afro Pop tracks to give you...</p>
+              </li>
+              <li class="tile">
+                <img class="tile__shelf" src="img/tile-shelf.svg" width="140" height="8" alt="" />
+                <div class="art"><img src="img/pl-2.png" alt="" /></div>
+                <h3 class="tile__title">Verified: R&amp;B</h3>
+                <p class="tile__desc">The biggest and best in Afrosounds right now</p>
+              </li>
+              <li class="tile">
+                <img class="tile__shelf" src="img/tile-shelf.svg" width="140" height="8" alt="" />
+                <div class="art"><img src="img/pl-3.png" alt="" /></div>
+                <h3 class="tile__title">Audiomack: BOTW</h3>
+                <p class="tile__desc">Our curators best new finds we addweekly</p>
+              </li>
+              <li class="tile">
+                <img class="tile__shelf" src="img/tile-shelf.svg" width="140" height="8" alt="" />
+                <div class="art"><img src="img/pl-4.jpg" alt="" /></div>
+                <h3 class="tile__title">Low N Slow</h3>
+                <p class="tile__desc">Welcome to Audiomack's Low and Slow playlist, whe...</p>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ================================================ trending songs -->
+          <section class="section">
+            <header class="module-head">
+              <h2 class="module-head__title">Trending Songs</h2>
+              <a class="module-head__more" href="#" aria-label="See all"><img src="img/icon-header-arrow.svg" width="10" height="10" alt="" /></a>
+            </header>
+            <div class="columns hscroll">
+              <ul class="songs">
+                <li class="song">
+                  <div class="art art--64"><img src="img/ts-1.jpg" alt="" /></div>
+                  <div class="song__copy song__copy--14">
+                    <p class="t-bold">Dave Edwards</p>
+                    <p class="song__muted--2">DMV Intro</p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song song--three">
+                  <div class="art art--64"><img src="img/ts-2.png" alt="" /></div>
+                  <div class="song__copy song__copy--14">
+                    <p class="t-bold">TGUT</p>
+                    <p class="song__muted">Swang</p>
+                    <p class="song__line-feat"><span>Feat.</span> <b>Yella Beezy</b></p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song song--three">
+                  <div class="art art--64"><img src="img/ts-3.jpg" alt="" /></div>
+                  <div class="song__copy song__copy--14">
+                    <p class="t-bold">Chance the Rapper</p>
+                    <p class="song__muted">All Day Long</p>
+                    <p class="song__line-feat"><span>Feat.</span> <b>John Legend</b></p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song song--three">
+                  <div class="art art--64"><img src="img/ts-4.png" alt="" /></div>
+                  <div class="song__copy song__copy--14">
+                    <p class="t-bold">TGUT</p>
+                    <p class="song__muted">GRIND</p>
+                    <p class="song__line-feat"><span>Feat.</span> <b>Medikal</b></p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+              </ul>
+              <ul class="songs songs--wide">
+                <li class="song song--three">
+                  <div class="art art--64"><img src="img/ts-5.jpg" alt="" /></div>
+                  <div class="song__copy song__copy--13">
+                    <p class="song__artist13">Hoodrich Pablo Juan</p>
+                    <p class="song__name13">DMV Intro</p>
+                    <p class="song__feat13">Feat. <b>Yella Beezy</b></p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song">
+                  <div class="art art--64"><img src="img/ts-6.jpg" alt="" /></div>
+                  <div class="song__copy song__copy--13 song__copy--tight">
+                    <p class="song__name13">Hoodrich Pablo Juan</p>
+                    <p class="song__feat13 song__muted">DMV Intro</p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song">
+                  <div class="art art--64"><img src="img/ts-7.jpg" alt="" /></div>
+                  <div class="song__copy song__copy--13 song__copy--tight">
+                    <p class="song__name13">Hoodrich Pablo Juan</p>
+                    <p class="song__feat13 song__muted">DMV Intro</p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song">
+                  <div class="art art--64"><img src="img/ts-8.jpg" alt="" /></div>
+                  <div class="song__copy song__copy--13 song__copy--tight">
+                    <p class="song__name13">Hoodrich Pablo Juan</p>
+                    <p class="song__feat13 song__muted">DMV Intro</p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- =============================================== trending albums -->
+          <section class="section">
+            <header class="module-head">
+              <h2 class="module-head__title">Trending Albums</h2>
+              <a class="module-head__more" href="#" aria-label="See all"><img src="img/icon-header-arrow-b.svg" width="10.1709" height="10.1709" alt="" /></a>
+            </header>
+            <ul class="grid">
+              <li class="album">
+                <div class="art"><img src="img/al-1.jpg" alt="" /></div>
+                <span class="album__edge"><img src="img/album-edge.svg" width="144" height="8" alt="" /></span>
+                <h3 class="album__title">Wally B. Seck</h3>
+                <p class="album__sub">I Wanna Be Free</p>
+              </li>
+              <li class="album">
+                <div class="art"><img src="img/al-2.png" alt="" /></div>
+                <span class="album__edge"><img src="img/album-edge.svg" width="144" height="8" alt="" /></span>
+                <h3 class="album__title">Reason</h3>
+                <p class="album__sub">Moving Towards</p>
+              </li>
+              <li class="album">
+                <div class="art"><img src="img/al-3.png" alt="" /></div>
+                <span class="album__edge"><img src="img/album-edge.svg" width="144" height="8" alt="" /></span>
+                <h3 class="album__title">Vybz Kartel, Spice &amp;...</h3>
+                <p class="album__sub">Y2K Dancehall Gold...</p>
+              </li>
+              <li class="album">
+                <div class="art"><img src="img/al-4.png" alt="" /></div>
+                <span class="album__edge"><img src="img/album-edge.svg" width="144" height="8" alt="" /></span>
+                <h3 class="album__title">Kehlani</h3>
+                <p class="album__sub">Kehlani</p>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ============================================ accounts for you -->
+          <section class="section">
+            <header class="module-head module-head--loose">
+              <h2 class="module-head__title">Accounts For You</h2>
+              <a class="module-head__more" href="#" aria-label="See all"><img src="img/icon-header-arrow.svg" width="10" height="10" alt="" /></a>
+            </header>
+            <ul class="accounts hscroll">
+              <li class="account">
+                <div class="account__avatar">
+                  <div class="art"><img src="img/acct-1.jpg" alt="" /></div>
+                  <img class="account__badge" src="img/badge-verified.svg" width="24" height="24" alt="Verified" />
+                </div>
+                <div class="account__copy">
+                  <p class="account__name">Chance the R...</p>
+                  <p class="account__followers">624.99K Followers</p>
+                </div>
+                <button class="follow" type="button" aria-pressed="false">Follow</button>
+              </li>
+              <li class="account">
+                <div class="account__avatar">
+                  <div class="art"><img src="img/acct-2.png" alt="" /></div>
+                  <img class="account__badge" src="img/badge-verified.svg" width="24" height="24" alt="Verified" />
+                </div>
+                <div class="account__copy">
+                  <p class="account__name">Migos</p>
+                  <p class="account__followers">624.99K Followers</p>
+                </div>
+                <button class="follow" type="button" aria-pressed="false">Follow</button>
+              </li>
+              <li class="account">
+                <div class="account__avatar">
+                  <div class="art"><img src="img/acct-3.jpg" alt="" /></div>
+                  <img class="account__badge" src="img/badge-verified.svg" width="24" height="24" alt="Verified" />
+                </div>
+                <div class="account__copy">
+                  <p class="account__name">Cash Cash Lo</p>
+                  <p class="account__followers">56.2K Followers</p>
+                </div>
+                <button class="follow" type="button" aria-pressed="false">Follow</button>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ================================================ mixes for you -->
+          <section class="section">
+            <header class="module-head">
+              <h2 class="module-head__title">Mixes for you</h2>
+              <a class="module-head__more" href="#" aria-label="See all"><img src="img/icon-header-arrow.svg" width="10" height="10" alt="" /></a>
+            </header>
+            <ul class="grid">
+              <li class="mix">
+                <img class="mix__shelf" src="img/mix-shelf.svg" width="140" height="8" alt="" />
+                <div class="mix__cover">
+                  <div class="mix__bg"><img src="img/mix-1.png" alt="" /></div>
+                  <img class="mix__shadow" src="img/mix-avatar-shadow.svg" width="144" height="144" alt="" />
+                  <div class="mix__face"><img src="img/mix-1.png" alt="" /></div>
+                  <img class="mix__ring" src="img/mix-avatar-ring.svg" width="145" height="145" alt="" />
+                  <img class="mix__logo" src="img/mix-logo.svg" width="16" height="12" alt="" />
+                  <img class="mix__logo-dot" src="img/mix-logo-dot.svg" width="2.52632" height="2.57143" alt="" />
+                </div>
+                <div class="mix__copy">
+                  <h3 class="mix__title">Ayra Starr Mix</h3>
+                  <p class="mix__desc">A custom mix of songs from Ayra Starr, Giveon &amp; Seyi Vibe...</p>
+                </div>
+              </li>
+              <li class="mix">
+                <img class="mix__shelf" src="img/mix-shelf.svg" width="140" height="8" alt="" />
+                <div class="mix__cover">
+                  <div class="mix__bg"><img src="img/mix-2.jpg" alt="" /></div>
+                  <img class="mix__shadow" src="img/mix-avatar-shadow.svg" width="144" height="144" alt="" />
+                  <div class="mix__face" data-crop style="--crop-x: -13.7%; --crop-y: -15.92%; --crop-w: 134.24%; --crop-h: 125.74%">
+                    <img src="img/mix-2.jpg" alt="" />
+                  </div>
+                  <img class="mix__ring" src="img/mix-avatar-ring.svg" width="145" height="145" alt="" />
+                  <img class="mix__logo" src="img/mix-logo.svg" width="16" height="12" alt="" />
+                  <img class="mix__logo-dot" src="img/mix-logo-dot.svg" width="2.52632" height="2.57143" alt="" />
+                </div>
+                <div class="mix__copy">
+                  <h3 class="mix__title">Wizka Mix</h3>
+                  <p class="mix__desc">A custom mix of songs from Wizka, Lebza The Villian, Sach...</p>
+                </div>
+              </li>
+              <li class="mix">
+                <img class="mix__shelf" src="img/mix-shelf.svg" width="140" height="8" alt="" />
+                <div class="mix__cover">
+                  <div class="mix__bg" data-crop style="--crop-x: -35.27%; --crop-y: -128.41%; --crop-w: 191.87%; --crop-h: 287.81%">
+                    <img src="img/mix-3.png" alt="" />
+                  </div>
+                  <img class="mix__shadow" src="img/mix-avatar-shadow.svg" width="144" height="144" alt="" />
+                  <div class="mix__face" data-crop style="--crop-x: -34.21%; --crop-y: -105.01%; --crop-w: 179.46%; --crop-h: 269.2%">
+                    <img src="img/mix-3.png" alt="" />
+                  </div>
+                  <img class="mix__ring" src="img/mix-avatar-ring.svg" width="145" height="145" alt="" />
+                  <img class="mix__logo" src="img/mix-logo.svg" width="16" height="12" alt="" />
+                  <img class="mix__logo-dot" src="img/mix-logo-dot.svg" width="2.52632" height="2.57143" alt="" />
+                </div>
+                <div class="mix__copy">
+                  <h3 class="mix__title">Ayo Maff Mix</h3>
+                  <p class="mix__desc">
+                    A custom mix of songs from
+                    <a href="https://audiomack.com/ayomaff" target="_blank" rel="noopener">Ayo Maff</a>, Beanie Man &amp;...
+                  </p>
+                </div>
+              </li>
+              <li class="mix">
+                <img class="mix__shelf" src="img/mix-shelf.svg" width="140" height="8" alt="" />
+                <div class="mix__cover">
+                  <div class="mix__bg"><img src="img/mix-4.png" alt="" /></div>
+                  <img class="mix__shadow" src="img/mix-avatar-shadow.svg" width="144" height="144" alt="" />
+                  <div class="mix__face"><img src="img/mix-4.png" alt="" /></div>
+                  <img class="mix__ring" src="img/mix-avatar-ring.svg" width="145" height="145" alt="" />
+                  <img class="mix__logo" src="img/mix-logo.svg" width="16" height="12" alt="" />
+                  <img class="mix__logo-dot" src="img/mix-logo-dot.svg" width="2.52632" height="2.57143" alt="" />
+                </div>
+                <div class="mix__copy">
+                  <h3 class="mix__title">Daddy Yankee Mix</h3>
+                  <p class="mix__desc">A custom mix of songs from Daddy Yankee, Sean Paul &amp;...</p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ================================================ new pro music -->
+          <section class="section">
+            <header class="module-head module-head--tall">
+              <h2 class="module-head__title">New Pro Music</h2>
+              <a class="pill-link" href="#">Get PRO <span>+</span></a>
+              <a class="module-head__more" href="#" aria-label="See all"><img src="img/icon-header-arrow.svg" width="10" height="10" alt="" /></a>
+            </header>
+            <div class="columns hscroll">
+              <ul class="songs">
+                <li class="song">
+                  <div class="art art--64"><img src="img/pro-1.png" alt="" /></div>
+                  <div class="song__copy song__copy--14">
+                    <p class="t-bold">Lebza The Villain</p>
+                    <p class="song__muted--2">Find You</p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song">
+                  <div class="art art--64"><img src="img/pro-2.png" alt="" /></div>
+                  <div class="song__copy song__copy--14">
+                    <p class="t-bold">Zeds Dead</p>
+                    <p class="song__muted">Runaway</p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song song--three">
+                  <div class="art art--64"><img src="img/pro-3.png" alt="" /></div>
+                  <div class="song__copy song__copy--14">
+                    <p class="t-bold">Sacha Robotti</p>
+                    <p class="song__muted">Whistle Man</p>
+                    <p class="song__line-feat"><span>Feat.</span> <b>Eric D. Clark</b></p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song">
+                  <div class="art art--64"><img src="img/pro-4.png" alt="" /></div>
+                  <div class="song__copy song__copy--14">
+                    <p class="t-bold">Barry Can’t Swim</p>
+                    <p class="song__muted">Chala (My Soul Is On A Loop)</p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+              </ul>
+              <ul class="songs songs--wide">
+                <li class="song song--three">
+                  <div class="art art--64"><img src="img/pro-5.png" alt="" /></div>
+                  <div class="song__copy song__copy--13">
+                    <p class="song__artist13">Hoodrich Pablo Juan</p>
+                    <p class="song__name13">DMV Intro</p>
+                    <p class="song__feat13">Feat. <b>Yella Beezy</b></p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song">
+                  <div class="art art--64"><img src="img/pro-6.png" alt="" /></div>
+                  <div class="song__copy song__copy--13 song__copy--tight">
+                    <p class="song__name13">Hoodrich Pablo Juan</p>
+                    <p class="song__feat13 song__muted">DMV Intro</p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song">
+                  <div class="art art--64"><img src="img/pro-7.png" alt="" /></div>
+                  <div class="song__copy song__copy--13 song__copy--tight">
+                    <p class="song__name13">Hoodrich Pablo Juan</p>
+                    <p class="song__feat13 song__muted">DMV Intro</p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+                <li class="songs__rule" aria-hidden="true"></li>
+                <li class="song">
+                  <div class="art art--64"><img src="img/pro-8.png" alt="" /></div>
+                  <div class="song__copy song__copy--13 song__copy--tight">
+                    <p class="song__name13">Hoodrich Pablo Juan</p>
+                    <p class="song__feat13 song__muted">DMV Intro</p>
+                  </div>
+                  <button class="kabob" type="button" aria-label="More"><img src="img/icon-more.svg" width="16" height="4" alt="" /></button>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- ============================================== audiomack world -->
+          <section class="section">
+            <header class="module-head">
+              <h2 class="module-head__title">Audiomack World</h2>
+              <a class="module-head__more" href="#" aria-label="See all"><img src="img/icon-header-arrow.svg" width="10" height="10" alt="" /></a>
+            </header>
+            <div class="stories hscroll">
+              <article class="story">
+                <img class="story__img" src="img/world-1.jpg" alt="" />
+                <h3 class="story__title">10 Rappers You Should Know Right Now in Hip Hop</h3>
+                <p class="story__desc">Music moves quickly these days. With so many new artists popping up, it can be difficult for...</p>
+              </article>
+              <article class="story">
+                <img class="story__img" src="img/world-2.jpg" alt="" />
+                <h3 class="story__title">Two critical moments stamped Skeng as otherworldly in 2022.</h3>
+                <p class="story__desc">
+                  While on a UK tour with deejay
+                  <a href="https://audiomack.com/govanamusic" target="_blank" rel="noopener">Govana</a> in April of this
+                  year, Skeng sat on stage barefoot and...
+                </p>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <!-- ============================================================ header -->
+      <header class="header" id="header">
+        <div class="status" aria-hidden="true">
+          <img class="status__time" src="img/status-time.svg" width="52" height="22" alt="" />
+          <img class="status__right" src="img/status-right.svg" width="66.6612" height="11.3359" alt="" />
+        </div>
+        <div class="titlebar">
+          <a class="titlebar__logo" href="#" aria-label="Audiomack home">
+            <img src="img/logo-mark.svg" width="30" height="20" alt="" />
+          </a>
+          <a class="pill-link" href="#">Get Plus <span>+</span></a>
+          <a class="titlebar__gift" href="#" aria-label="Ad-free"><img src="img/icon-gift.svg" width="20.875" height="19.875" alt="" /></a>
+          <a class="titlebar__upload" href="#" aria-label="Upload"><img src="img/icon-upload.svg" width="15" height="18" alt="" /></a>
+          <a class="titlebar__bell" href="#" aria-label="Notifications, 24 unread"><img src="img/icon-bell.svg" width="16" height="18" alt="" /></a>
+          <span class="titlebar__badge" aria-hidden="true">24</span>
+          <a class="titlebar__settings" href="#" aria-label="Settings"><img src="img/icon-settings.svg" width="18" height="18" alt="" /></a>
+        </div>
+      </header>
+
+      <!-- ============================================================== dock -->
+      <div class="dock">
+        <a class="ad" href="#" aria-label="Advertisement">
+          <img src="img/ad-boss.jpg" alt="" />
+        </a>
+
+        <div class="player" role="region" aria-label="Now playing">
+          <img class="player__progress" src="img/player-progress.svg" width="105" height="2" alt="" />
+          <img class="player__art" src="img/player-art.jpg" alt="" />
+          <div class="player__copy">
+            <p class="player__artist">Kevin Holliday</p>
+            <p class="player__track">Regrets <span>feat. Roach Girl &amp; Eric Solitude</span></p>
+          </div>
+          <button class="player__pause" type="button" aria-label="Pause" aria-pressed="true">
+            <img src="img/icon-pause.svg" width="33.5" height="33.5" alt="" />
+          </button>
+          <button class="player__more kabob" type="button" aria-label="More">
+            <img src="img/icon-more.svg" width="16" height="4" alt="" />
+          </button>
+        </div>
+
+        <nav class="tabbar" aria-label="Primary">
+          <a class="tab tab--discover" href="#" aria-current="page">
+            <img class="tab__icon" src="img/nav-discover.svg" width="18" height="20" alt="" />
+            <span class="tab__label">Discover</span>
+          </a>
+          <a class="tab tab--charts" href="#">
+            <img class="tab__icon" src="img/nav-charts.svg" width="26" height="16" alt="" />
+            <span class="tab__label">Charts</span>
+          </a>
+          <a class="tab tab--search" href="#">
+            <img class="tab__icon" src="img/nav-search.svg" width="18.25" height="18.25" alt="" />
+            <span class="tab__label">Search</span>
+          </a>
+          <a class="tab tab--feed" href="#">
+            <img class="tab__icon" src="img/nav-feed.svg" width="26" height="19" alt="" />
+            <span class="tab__dot" aria-hidden="true"></span>
+            <span class="tab__label">Feed</span>
+          </a>
+          <a class="tab tab--library" href="#">
+            <img class="tab__avatar" src="img/avatar-library.jpg" alt="" />
+            <img class="tab__ring" src="img/avatar-ring.svg" width="25.5" height="25.5" alt="" />
+            <span class="tab__label">My Library</span>
+          </a>
+          <span class="home-indicator" aria-hidden="true"></span>
+        </nav>
+      </div>
+    </div>
+
+    <script src="main.js" defer></script>
+  </body>
+</html>
