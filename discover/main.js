@@ -1,6 +1,6 @@
 // Audiomack — Discover (mobile) interactions.
 // Header backdrop on scroll, genre pills, carousel dots, follow toggles,
-// dismissible upsell, tab bar and play/pause state.
+// dismissible upsell and tab bar.
 
 (() => {
   const scroll = document.getElementById("scroll");
@@ -62,11 +62,4 @@
     });
   });
 
-  // Mini-player pause button.
-  const pause = document.querySelector(".player__pause");
-  pause.addEventListener("click", () => {
-    const playing = pause.getAttribute("aria-pressed") !== "true";
-    pause.setAttribute("aria-pressed", String(playing));
-    pause.setAttribute("aria-label", playing ? "Pause" : "Play");
-  });
 })();

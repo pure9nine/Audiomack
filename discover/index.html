@@ -7,7 +7,6 @@
     <meta name="theme-color" content="#000000" />
     <title>Audiomack — Discover</title>
     <link rel="icon" href="img/logo-mark.svg" type="image/svg+xml" />
-    <link rel="preload" href="fonts/opensans-latin-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -540,6 +539,11 @@
               </article>
             </div>
           </section>
+
+          <!-- ===================================================== wordmark -->
+          <footer class="wordmark">
+            <img src="img/wordmark-audiomack.png" width="359" height="120" alt="Audiomack" />
+          </footer>
         </main>
       </div>
 
@@ -564,25 +568,6 @@
 
       <!-- ============================================================== dock -->
       <div class="dock">
-        <a class="ad" href="#" aria-label="Advertisement">
-          <img src="img/ad-boss.jpg" alt="" />
-        </a>
-
-        <div class="player" role="region" aria-label="Now playing">
-          <img class="player__progress" src="img/player-progress.svg" width="105" height="2" alt="" />
-          <img class="player__art" src="img/player-art.jpg" alt="" />
-          <div class="player__copy">
-            <p class="player__artist">Kevin Holliday</p>
-            <p class="player__track">Regrets <span>feat. Roach Girl &amp; Eric Solitude</span></p>
-          </div>
-          <button class="player__pause" type="button" aria-label="Pause" aria-pressed="true">
-            <img src="img/icon-pause.svg" width="33.5" height="33.5" alt="" />
-          </button>
-          <button class="player__more kabob" type="button" aria-label="More">
-            <img src="img/icon-more.svg" width="16" height="4" alt="" />
-          </button>
-        </div>
-
         <nav class="tabbar" aria-label="Primary">
           <a class="tab tab--discover" href="#" aria-current="page">
             <img class="tab__icon" src="img/nav-discover.svg" width="18" height="20" alt="" />
@@ -608,6 +593,14 @@
           </a>
           <span class="home-indicator" aria-hidden="true"></span>
         </nav>
+      </div>
+
+      <!-- ============================================================ loader -->
+      <div class="loader" aria-hidden="true">
+        <div class="loader__clip">
+          <video class="loader__video" src="video/loader-glitch.mp4" width="160" height="160"
+                 autoplay muted playsinline preload="auto"></video>
+        </div>
       </div>
     </div>
 
