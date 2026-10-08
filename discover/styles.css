@@ -115,7 +115,7 @@ h3 {
    so it can never get stuck. The fixed status bar sits above it so it —
    identical on both screens — never blinks. */
 :root {
-  --loader-hold: 3s; /* clip plays */
+  --loader-hold: 3.5s; /* 3s clip plays, then its last frame holds for 0.5s */
   --loader-video-fade: 500ms; /* clip fades out */
   --loader-fade: 700ms; /* then Discover fades in */
   --loader-reveal-at: calc(var(--loader-hold) + var(--loader-video-fade));
@@ -129,8 +129,8 @@ h3 {
   animation: loader-out var(--loader-fade) ease var(--loader-reveal-at) forwards;
 }
 
-/* Dark "AUDIOMACK" type textures (top_blur ALT-color-inverse-loader / -footer)
-   pinned to the top and bottom of the loader. */
+/* Dark "AUDIOMACK" type texture (top_blur ALT-color-inverse-loader) pinned to
+   the top of the loader. */
 .loader__art {
   position: absolute;
   left: 0;
@@ -143,12 +143,58 @@ h3 {
   top: 0;
 }
 
-.loader__art--bottom {
-  bottom: 0;
+/* Spinner (Figma "loading", 44831:34501): 24×24 ring — r 11, 2px #ffa200
+   stroke — centred, 67px off the bottom (y 721 in the 812 frame). Animated
+   like the Material indeterminate spinner: the ring turns steadily while the
+   arc eases out to ~¾ of the circle and back. Fades out with the clip. */
+.loader__spinner {
+  position: absolute;
+  left: calc(50% - 12px);
+  bottom: 67px;
+  overflow: visible;
+  pointer-events: none;
+  animation:
+    loader-spin 2s linear infinite,
+    loader-out var(--loader-video-fade) ease var(--loader-hold) forwards;
+}
+
+.loader__spinner circle {
+  fill: none;
+  stroke: #ffa200;
+  stroke-width: 2;
+  /* Circumference 2π·11 ≈ 69.1; dash lengths below are fractions of it. */
+  stroke-dasharray: 1 100;
+  stroke-dashoffset: 0;
+  animation: loader-arc 1.5s ease-in-out infinite;
+}
+
+/* Starts from the drawn -90° (12 o'clock) like the Figma ring. */
+@keyframes loader-spin {
+  from {
+    transform: rotate(-90deg);
+  }
+  to {
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes loader-arc {
+  0% {
+    stroke-dasharray: 1 100;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 49 100;
+    stroke-dashoffset: -19;
+  }
+  100% {
+    stroke-dasharray: 49 100;
+    stroke-dashoffset: -68;
+  }
 }
 
 /* Glitch-logo clip (Figma 44609:3015): 160×160 at x 108 / y 326 — centred, nudged ½px right.
-   The source is 320×320 for 2× screens and runs the full 3s hold. */
+   The source is 320×320 for 2× screens; it runs 3s and rests on its last frame. */
 .loader__video {
   position: absolute;
   left: calc(50% + 0.5px);
