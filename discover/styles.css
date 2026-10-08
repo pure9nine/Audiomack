@@ -129,6 +129,24 @@ h3 {
   animation: loader-out var(--loader-fade) ease var(--loader-reveal-at) forwards;
 }
 
+/* Dark "AUDIOMACK" type textures (top_blur ALT-color-inverse-loader / -footer)
+   pinned to the top and bottom of the loader. */
+.loader__art {
+  position: absolute;
+  left: 0;
+  width: 375px;
+  height: 233px;
+  pointer-events: none;
+}
+
+.loader__art--top {
+  top: 0;
+}
+
+.loader__art--bottom {
+  bottom: 0;
+}
+
 /* Glitch-logo clip (Figma 44609:3015): 160×160 at x 108 / y 326 — centred, nudged ½px right.
    The source is 320×320 for 2× screens and runs the full 3s hold. */
 .loader__video {
@@ -248,24 +266,6 @@ h3 {
     linear-gradient(to bottom, rgba(13, 13, 13, 0), rgba(13, 13, 13, 0.8)),
     linear-gradient(to bottom, rgba(13, 13, 13, 0), #0d0d0d),
     linear-gradient(to right, #0d0d0d, rgba(13, 13, 13, 0)) left top / 279px 100% no-repeat;
-}
-
-/* Loader variant (ALT-color-inverse-loader, 44817:11859): same mesh and
-   outline, but on black with every wash in pure black. */
-.top-blur--loader {
-  background: #000;
-}
-
-.top-blur--loader::before {
-  background: linear-gradient(to top, #000, rgba(0, 0, 0, 0.75));
-}
-
-.top-blur--loader::after {
-  background:
-    linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.16)),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0), #000),
-    linear-gradient(to right, #000, rgba(0, 0, 0, 0)) left top / 279px 100% no-repeat;
 }
 
 .content {
