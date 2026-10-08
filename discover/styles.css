@@ -201,32 +201,64 @@ h3 {
   display: none;
 }
 
-/* Blurred cover art bleeding behind the header (instance "top_blur"). */
+/* Warm glow behind the header (instance "top_blur", variant ALT-color-inverse,
+   44812:20695) — used on both Discover and the loader so the hand-off is
+   seamless. Layers, bottom to top: #9a8869 base, dark wash, rotated gradient
+   mesh, faint AUDIOMACK outline, then four dark gradients. */
 .top-blur {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 375px;
   height: 233px;
   overflow: hidden;
+  background: #9a8869;
   pointer-events: none;
 }
 
-.top-blur img {
-  position: absolute;
-  left: -163px;
-  top: -73px;
-  width: 500px;
-  height: 500px;
-  object-fit: cover;
-  filter: blur(40px);
-}
-
+.top-blur::before,
 .top-blur::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(13, 13, 13, 0.75), #0d0d0d);
+}
+
+.top-blur::before {
+  background: linear-gradient(to top, #0d0d0d, rgba(13, 13, 13, 0.75));
+}
+
+.top-blur__mesh {
+  position: absolute;
+  left: -59.33px;
+  top: -25.7px;
+  width: 500.077px;
+  height: 376.231px;
+  overflow: hidden;
+  opacity: 0.7;
+  transform: rotate(-15deg);
+}
+
+.top-blur__mesh img {
+  position: absolute;
+  left: -4.17%;
+  top: 0;
+  width: 138.56%;
+  height: 100%;
+}
+
+.top-blur__wordmark {
+  position: absolute;
+  left: -454px;
+  top: -31.09px;
+}
+
+/* Listed top-most first, as CSS stacks multiple backgrounds. */
+.top-blur::after {
+  background:
+    linear-gradient(to right, rgba(13, 13, 13, 0.8), rgba(13, 13, 13, 0.16)),
+    linear-gradient(to bottom, rgba(13, 13, 13, 0), rgba(13, 13, 13, 0.8)),
+    linear-gradient(to bottom, rgba(13, 13, 13, 0), #0d0d0d),
+    linear-gradient(to right, #0d0d0d, rgba(13, 13, 13, 0)) left top / 279px 100% no-repeat;
 }
 
 .content {
