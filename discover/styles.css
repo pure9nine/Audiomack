@@ -273,14 +273,44 @@ h3 {
   padding: 106px var(--gutter) calc(var(--dock-h) + 15px);
 }
 
-/* Big wordmark at the end of the feed — scrolls in, sits 15px above the tab bar. */
+/* Big wordmark at the end of the feed (Figma 44820:19718) — scrolls in, sits
+   15px above the tab bar. The orange mark sits on a dark rounded badge made of
+   two offset shapes, punched into the middle of the lettering. */
 .wordmark {
+  position: relative;
+  width: 359px;
+  height: 127px;
   margin-top: var(--section-gap);
 }
 
-.wordmark img {
+.wordmark > img {
+  position: absolute;
+}
+
+.wordmark__type {
+  left: 0;
+  top: 0;
   width: 359px;
-  height: 119.999px;
+  height: 127px;
+}
+
+/* The two badge shapes are drawn upright in Figma and turned 90°. */
+.wordmark__badge-back {
+  left: 152.29px;
+  top: 32.29px;
+  transform: rotate(90deg);
+}
+
+.wordmark__badge-front {
+  left: 150.43px;
+  top: 29.57px;
+  transform: rotate(90deg);
+}
+
+.wordmark__badge-mark {
+  left: 155.85px;
+  top: 48.77px;
+  object-fit: cover;
 }
 
 /* Horizontal rows bleed to the screen edge while starting on the gutter. */
