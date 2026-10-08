@@ -16,7 +16,7 @@
 }
 
 :root {
-  --page: #000;
+  --page: #ffffff;
   --bg: #0d0d0d;
   --surface: rgba(255, 255, 255, 0.05);
   --line: rgba(255, 255, 255, 0.1);
@@ -112,9 +112,8 @@ h3 {
 
 /* Splash (Figma AM-Loader, 44491:3033) held over the screen. After the hold
    the clip fades out, then the loader fades away to reveal Discover. Pure CSS
-   so it can never get stuck. The header sits above it so the status bar —
-   identical on both screens — never blinks; the rest of the header fades in
-   with the content. */
+   so it can never get stuck. The fixed status bar sits above it so it —
+   identical on both screens — never blinks. */
 :root {
   --loader-hold: 3s; /* clip plays */
   --loader-video-fade: 500ms; /* clip fades out */
@@ -126,7 +125,7 @@ h3 {
   position: absolute;
   inset: 0;
   z-index: 11; /* over the scroll + dock, under the header */
-  background: var(--bg); /* matches the clip's own #0d0d0d */
+  background: #000;
   animation: loader-out var(--loader-fade) ease var(--loader-reveal-at) forwards;
 }
 
@@ -141,16 +140,12 @@ h3 {
   object-fit: cover;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  /* Safari renders this clip's #0d0d0d backdrop darker (#0a0a0a) than Chrome
-     does. "lighten" keeps whichever is brighter per pixel, so the near-black
-     backdrop always lands exactly on the loader's #0d0d0d while the logo,
-     far brighter, is untouched. */
-  mix-blend-mode: lighten;
+  /* The clip has a baked-in #0d0d0d backdrop (Safari shows it as #0a0a0a).
+     A levels tweak maps 13/255 → 0 and leaves white at white, so that
+     backdrop (in either browser) lands on the loader's #000; the logo only
+     gains ~5% contrast. contrast() then brightness() = (in − 0.051) × 1.054. */
+  filter: contrast(1.1136) brightness(0.9463);
   animation: loader-out var(--loader-video-fade) ease var(--loader-hold) forwards;
-}
-
-.titlebar {
-  animation: loader-reveal var(--loader-fade) ease var(--loader-reveal-at) both;
 }
 
 /* Keep the content hidden (not just covered) during the hold — when the phone
@@ -171,12 +166,6 @@ h3 {
   to {
     opacity: 0;
     visibility: hidden;
-  }
-}
-
-@keyframes loader-reveal {
-  from {
-    opacity: 0;
   }
 }
 
@@ -261,6 +250,24 @@ h3 {
     linear-gradient(to right, #0d0d0d, rgba(13, 13, 13, 0)) left top / 279px 100% no-repeat;
 }
 
+/* Loader variant (ALT-color-inverse-loader, 44817:11859): same mesh and
+   outline, but on black with every wash in pure black. */
+.top-blur--loader {
+  background: #000;
+}
+
+.top-blur--loader::before {
+  background: linear-gradient(to top, #000, rgba(0, 0, 0, 0.75));
+}
+
+.top-blur--loader::after {
+  background:
+    linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.16)),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0), #000),
+    linear-gradient(to right, #000, rgba(0, 0, 0, 0)) left top / 279px 100% no-repeat;
+}
+
 .content {
   position: relative;
   padding: 106px var(--gutter) calc(var(--dock-h) + 15px);
@@ -293,23 +300,39 @@ h3 {
 
 /* ------------------------------------------------------------------ header */
 
+/* Only the status bar stays fixed; the title bar scrolls away with the page.
+   Once scrolled, an 80px #0d0d0d fade sits behind the status bar (as on
+   AM-Main-Search_Hubs-Scroll, 43661:9469). */
 .header {
   position: absolute;
   inset: 0 0 auto;
   z-index: 12; /* above the loader */
-  height: 98px;
-  transition: background-color 0.2s ease, backdrop-filter 0.2s ease;
+  height: 44px;
+  pointer-events: none;
 }
 
-.header.is-scrolled {
-  background: rgba(13, 13, 13, 0.8);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 80px;
+  background: linear-gradient(to bottom, #0d0d0d, rgba(0, 0, 0, 0));
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.header.is-scrolled::before {
+  opacity: 1;
 }
 
 .status {
   position: relative;
   height: 44px;
+}
+
+/* Lives in the scrolling content, at the same spot it held in the old fixed header. */
+.titlebar {
+  z-index: 1;
 }
 
 .status__time {
