@@ -193,14 +193,15 @@ h3 {
   }
 }
 
-/* Glitch-logo clip (Figma 44609:3015): 160×160 at x 108 / y 326 — centred, nudged ½px right.
-   The source is 320×320 for 2× screens; it runs 3s and rests on its last frame. */
+/* Glitch-logo clip: 200×200, centred on the same point as the Figma frame
+   (44609:3015, x 108 / y 326 at 160×160) — nudged ½px right. The source is
+   400×400 for 2× screens. */
 .loader__video {
   position: absolute;
   left: calc(50% + 0.5px);
   top: 50%;
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   transform: translate(-50%, -50%);
   pointer-events: none;
