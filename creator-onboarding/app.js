@@ -160,6 +160,79 @@
   window.addEventListener('resize', fit);
   fit();
 
+  /* ---------- spinning wireframe globe (Get discovered) ---------- */
+  (function globe() {
+    const canvas = document.querySelector('canvas.globe');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = 300, H = 289, CX = 150, CY = 148, R = 134;
+    const DEG = Math.PI / 180;
+    const tilt = 17 * DEG, pitch = 22 * DEG;            // matches the angle of the design's globe
+    const ct = Math.cos(tilt), st = Math.sin(tilt), cp = Math.cos(pitch), sp = Math.sin(pitch);
+    const REV_SECONDS = 26;                               // one full turn
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const slide = slides[1];
+
+    canvas.width = W * 2;                                  // draw at 2x for sharp lines
+    canvas.height = H * 2;
+    ctx.scale(2, 2);
+
+    const project = (lat, lon, spin) => {
+      const cl = Math.cos(lat), l = lon + spin;
+      const x = cl * Math.sin(l), y = Math.sin(lat), z = cl * Math.cos(l);
+      const y1 = y * cp - z * sp, z1 = y * sp + z * cp;   // lean the north pole toward the viewer
+      return [CX + R * (x * ct + y1 * st), CY - R * (-x * st + y1 * ct), z1];
+    };
+
+    function draw(spin) {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.clearRect(0, 0, W, H);
+      const front = new Path2D(), back = new Path2D();
+      const line = (pts) => {
+        for (let i = 1; i < pts.length; i++) {
+          const a = pts[i - 1], b = pts[i];
+          const p = (a[2] + b[2]) / 2 > 0 ? front : back;
+          p.moveTo(a[0], a[1]);
+          p.lineTo(b[0], b[1]);
+        }
+      };
+      for (let k = 0; k < 24; k++) {                       // meridians every 15°
+        const pts = [];
+        for (let lat = -90; lat <= 90; lat += 5) pts.push(project(lat * DEG, k * 15 * DEG, spin));
+        line(pts);
+      }
+      for (let lat = -75; lat <= 75; lat += 15) {          // parallels every 15°
+        const pts = [];
+        for (let lon = 0; lon <= 360; lon += 5) pts.push(project(lat * DEG, lon * DEG, spin));
+        line(pts);
+      }
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(255,255,255,.15)';
+      ctx.stroke(back);
+      ctx.strokeStyle = 'rgba(255,255,255,.4)';
+      ctx.stroke(front);
+      ctx.beginPath();                                     // outline of the sphere
+      ctx.arc(CX, CY, R, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255,255,255,.28)';
+      ctx.stroke();
+
+      // fade out toward the bottom, like the design
+      ctx.globalCompositeOperation = 'destination-in';
+      const g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, 'rgba(0,0,0,1)');
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+    }
+
+    draw(0.4);
+    if (still) return;
+    (function tick(now) {
+      if (slide.classList.contains('in')) draw((now / 1000) * (2 * Math.PI / REV_SECONDS));
+      requestAnimationFrame(tick);
+    })(performance.now());
+  })();
+
   /* ---------- go ---------- */
   render();
   void phone.offsetHeight;                      // commit the "before" state so the first entrance animates

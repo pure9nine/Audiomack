@@ -6,7 +6,7 @@
   <title>Audiomack Creator Onboarding</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -40,12 +40,13 @@
 
       <section class="slide" aria-label="2 of 6">
         <div class="art">
-          <div class="p fx-pop" style="left:23px;top:255px;width:92px;height:92px;--d:380ms;--ph:0.0s"><img class="idle-float" src="assets/p/s2-av1.webp" alt="" draggable="false"></div>
-          <div class="p fx-pop" style="left:256px;top:261px;width:92px;height:92px;--d:480ms;--ph:0.9s"><img class="idle-float" src="assets/p/s2-av2.webp" alt="" draggable="false"></div>
-          <div class="p fx-pop" style="left:102px;top:350px;width:92px;height:92px;--d:580ms;--ph:1.7s"><img class="idle-float" src="assets/p/s2-av3.webp" alt="" draggable="false"></div>
-          <div class="p fx-pop" style="left:272px;top:390px;width:92px;height:92px;--d:680ms;--ph:2.4s"><img class="idle-float" src="assets/p/s2-av4.webp" alt="" draggable="false"></div>
-          <div class="p fx-rise" style="left:44px;top:96px;width:288px;height:125px;--d:0ms"><img class="" src="assets/p/s2-title.webp" alt="" draggable="false"></div>
-          <div class="p fx-zoom" style="left:52.5px;top:15.5px;width:314.5px;height:484.5px;--d:140ms"><img class="" src="assets/p/s2-globe.webp" alt="" draggable="false"></div>
+          <div class="p fx-zoom" style="left:38px;top:239px;width:300px;height:289px;--d:140ms"><canvas class="globe" width="600" height="578"></canvas></div>
+          <div class="p fx-pop" style="left:29px;top:261px;width:80px;height:80px;--d:380ms"><img class="idle-float" src="assets/fig/reach-av-d.webp" style="--ph:0s" alt="" draggable="false"></div>
+          <div class="p fx-pop" style="left:262px;top:267px;width:80px;height:80px;--d:480ms"><div class="av idle-float" style="--ph:0.9s"><img src="assets/fig/reach-av-a.webp" alt="" draggable="false"></div></div>
+          <div class="p fx-pop" style="left:108px;top:356px;width:80px;height:80px;--d:580ms"><div class="av idle-float" style="--ph:1.7s"><img src="assets/fig/reach-av-b.webp" alt="" draggable="false"></div></div>
+          <div class="p fx-pop" style="left:278px;top:396px;width:80px;height:80px;--d:680ms"><div class="av idle-float" style="--ph:2.4s"><img src="assets/fig/reach-av-c.webp" alt="" draggable="false"></div></div>
+          <p class="p fx-zoom fpo" style="left:0;top:288px;width:370px;--d:300ms">FPO</p>
+          <div class="p fx-rise" style="left:44px;top:96px;width:288px;height:125px;--d:0ms"><img src="assets/fig/reach-title.webp" alt="" draggable="false"></div>
         </div>
         <div class="copy">
           <h1>Get discovered.</h1>
@@ -55,13 +56,23 @@
 
       <section class="slide" aria-label="3 of 6">
         <div class="art">
-          <div class="p fx-pop" style="left:175px;top:332px;width:27px;height:25px;--d:1050ms"><img class="" src="assets/p/s3-dot.webp" alt="" draggable="false"></div>
-          <div class="p fx-pop" style="left:155px;top:295px;width:72px;height:40px;--d:1150ms"><img class="" src="assets/p/s3-tip.webp" alt="" draggable="false"></div>
-          <div class="p fx-pop" style="left:148px;top:91px;width:80px;height:80px;--d:0ms"><img class="idle-pulse" src="assets/p/s3-orb.webp" alt="" draggable="false"></div>
-          <div class="p fx-rise" style="left:226.5px;top:135.5px;width:126.5px;height:80.5px;--d:260ms"><img class="" src="assets/p/s3-boosted.webp" alt="" draggable="false"></div>
-          <div class="p fx-rise" style="left:129.5px;top:173.5px;width:114px;height:80px;--d:180ms"><img class="" src="assets/p/s3-plays.webp" alt="" draggable="false"></div>
-          <div class="p fx-rise" style="left:25.5px;top:148.5px;width:117px;height:80px;--d:100ms"><img class="" src="assets/p/s3-revenue.webp" alt="" draggable="false"></div>
-          <div class="p fx-wipe" style="left:12px;top:265px;width:340px;height:235px;--d:450ms;--dur:1300ms"><img class="" src="assets/p/s3-chart.webp" alt="" draggable="false"></div>
+          <div class="p fx-pop" style="left:152px;top:95px;width:72px;height:72px;--d:0ms"><img class="idle-pulse" src="assets/fig/orb-dollar.svg" width="72" height="72" alt="" draggable="false"></div>
+          <div class="p fx-rise" style="left:28px;top:151px;width:112px;--d:100ms"><div class="stat"><p class="label">Revenue</p><p class="value">$420.22</p></div></div>
+          <div class="p fx-rise" style="left:132px;top:176px;width:109px;--d:180ms"><div class="stat" style="background:#13100c"><p class="label">30 Sec Plays</p><p class="value">212.6K</p></div></div>
+          <div class="p fx-rise" style="left:229px;top:138px;width:121px;--d:260ms"><div class="stat" style="background:#1d150d"><p class="label">Boosted Songs</p><p class="value">298</p></div></div>
+          <div class="chart" style="left:27px;top:263px;width:320.651px;height:261.756px">
+            <div class="p fx-fade chart-grid" style="--d:300ms">
+              <div class="nums"><p>$160</p><p>$120</p><p>$80</p><p>$40</p><p>$0</p></div>
+              <i class="gl" style="inset:11.2% 0 88.4% 11.17%"></i>
+              <i class="gl" style="inset:32.8% 0 66.8% 11.17%"></i>
+              <i class="gl" style="inset:54% 0 45.6% 11.17%"></i>
+              <i class="gl" style="inset:75.6% 0 24% 11.17%"></i>
+              <i class="gl" style="inset:97.6% 0 2% 11.17%"></i>
+            </div>
+            <div class="p fx-wipe pad chart-line" style="--d:450ms;--dur:1300ms"><div class="rot"><img src="assets/fig/mont-line.svg" alt="" draggable="false"></div></div>
+            <div class="p fx-pop chart-dot" style="--d:1100ms"><img src="assets/fig/mont-oval.svg" alt="" draggable="false"></div>
+            <div class="p fx-pop chart-tip" style="--d:1200ms"><span>$100.62</span></div>
+          </div>
         </div>
         <div class="copy">
           <h1>Get paid for your<br>streams.</h1>
@@ -71,9 +82,12 @@
 
       <section class="slide" aria-label="4 of 6">
         <div class="art">
-          <div class="p fx-pop" style="left:242.5px;top:138.5px;width:80px;height:80px;--d:420ms"><img class="idle-pulse" src="assets/p/s4-orb.webp" alt="" draggable="false"></div>
-          <div class="p fx-rise" style="left:27px;top:366px;width:146px;height:96px;--d:560ms"><img class="" src="assets/p/s4-alltime.webp" alt="" draggable="false"></div>
-          <div class="p fx-rise-big" style="left:21px;top:15.5px;width:335px;height:440px;--d:0ms"><img class="" src="assets/p/s4-cards.webp" alt="" draggable="false"></div>
+          <div class="p fx-rise-big" style="left:19px;top:116px;width:191.741px;height:223.901px;--d:0ms"><div class="up-wrap idle-float" style="--ph:0.4s"><img class="up-card" style="width:159.175px;height:198.968px;border-radius:18.265px;transform:rotate(-10.15deg)" src="assets/fig/up-card-1.webp" alt="" draggable="false"></div></div>
+          <div class="p fx-rise-big" style="left:117.43px;top:199.98px;width:160px;height:200px;--d:120ms"><div class="up-wrap idle-float" style="--ph:1.2s"><img class="up-card" style="width:160px;height:200px;border-radius:18.36px;box-shadow:0 0 91.798px rgba(0,0,0,.8)" src="assets/fig/up-card-3.webp" alt="" draggable="false"></div></div>
+          <div class="p fx-rise-big" style="left:197.41px;top:264.97px;width:159.555px;height:189.927px;--d:240ms"><div class="up-wrap idle-float" style="--ph:2s"><img class="up-card" style="width:139.437px;height:174.296px;border-radius:16px;box-shadow:0 0 80px rgba(0,0,0,.8);transform:rotate(6.97deg)" src="assets/fig/up-card-2.webp" alt="" draggable="false"></div></div>
+          <p class="p fx-zoom fpo" style="left:0;top:289px;width:370px;--d:300ms">FPO</p>
+          <div class="p fx-pop" style="left:246.43px;top:142.84px;width:72px;height:72px;--d:420ms"><img class="idle-pulse" src="assets/fig/orb-upload.svg" width="72" height="72" alt="" draggable="false"></div>
+          <div class="p fx-rise" style="left:30.43px;top:369.84px;width:138.84px;--d:560ms"><div class="stat big"><p class="label">Alltime Plays</p><p class="value">640,827</p></div></div>
         </div>
         <div class="copy">
           <h1>Drop as much music<br>as you want.</h1>
@@ -83,19 +97,13 @@
 
       <section class="slide" aria-label="5 of 6">
         <div class="art">
-          <div class="p fx-fade" style="left:26px;top:358px;width:283px;height:6px;--d:600ms"><img class="" src="assets/p/s5-track1.webp" alt="" draggable="false"></div>
-          <div class="p fx-fade" style="left:66px;top:417px;width:283px;height:6px;--d:720ms"><img class="" src="assets/p/s5-track2.webp" alt="" draggable="false"></div>
-          <div class="p fx-fade" style="left:26px;top:476px;width:283px;height:6px;--d:840ms"><img class="" src="assets/p/s5-track3.webp" alt="" draggable="false"></div>
-          <div class="p fx-pop" style="left:157px;top:44px;width:80px;height:80px;--d:0ms"><img class="idle-pulse" src="assets/p/s5-orb.webp" alt="" draggable="false"></div>
-          <div class="p fx-left" style="left:22px;top:98px;width:286px;height:62px;--d:100ms"><img class="" src="assets/p/s5-t1.webp" alt="" draggable="false"></div>
-          <div class="p fx-right" style="left:69px;top:170px;width:286px;height:62px;--d:220ms"><img class="" src="assets/p/s5-t2.webp" alt="" draggable="false"></div>
-          <div class="p fx-left" style="left:37px;top:242px;width:286px;height:62px;--d:340ms"><img class="" src="assets/p/s5-t3.webp" alt="" draggable="false"></div>
-          <div class="p fx-fill" style="left:24px;top:356px;width:168px;height:10px;--d:700ms;--dur:1000ms"><img class="" src="assets/p/s5-fill1.webp" alt="" draggable="false"></div>
-          <div class="p fx-fill" style="left:64px;top:415px;width:88px;height:10px;--d:820ms;--dur:1000ms"><img class="" src="assets/p/s5-fill2.webp" alt="" draggable="false"></div>
-          <div class="p fx-fill" style="left:24px;top:474px;width:36px;height:10px;--d:940ms;--dur:1000ms"><img class="" src="assets/p/s5-fill3.webp" alt="" draggable="false"></div>
-          <div class="p fx-rise-s" style="left:22px;top:326px;width:291px;height:44px;--d:600ms"><img class="" src="assets/p/s5-c1.webp" alt="" draggable="false"></div>
-          <div class="p fx-rise-s" style="left:62px;top:385px;width:291px;height:44px;--d:720ms"><img class="" src="assets/p/s5-c2.webp" alt="" draggable="false"></div>
-          <div class="p fx-rise-s" style="left:22px;top:444px;width:291px;height:44px;--d:840ms"><img class="" src="assets/p/s5-c3.webp" alt="" draggable="false"></div>
+          <div class="p fx-left" style="left:25px;top:101px;width:280px;--d:100ms"><div class="track-row"><div class="thumb"><img src="assets/fig/st-thumb-1.webp" alt="" draggable="false"></div><div class="meta"><p class="t">Can’t Change</p><p class="s">TGUT &amp; WAV</p></div><div class="plays"><img src="assets/fig/play-icon.svg" width="11" height="12" alt="" draggable="false"><span>4,843</span></div></div></div>
+          <div class="p fx-right" style="left:72px;top:173px;width:280px;--d:220ms"><div class="track-row"><div class="thumb"><img src="assets/fig/st-thumb-2.webp" alt="" draggable="false"></div><div class="meta"><p class="t">Tell Me</p><p class="s">TGUT &amp; Jay Prince</p></div><div class="plays"><img src="assets/fig/play-icon.svg" width="11" height="12" alt="" draggable="false"><span>3,812</span></div></div></div>
+          <div class="p fx-left" style="left:40px;top:245px;width:280px;--d:340ms"><div class="track-row"><div class="thumb"><img src="assets/fig/st-thumb-3.webp" alt="" draggable="false"></div><div class="meta"><p class="t">IYGT</p><p class="s">TGUT</p></div><div class="plays"><img src="assets/fig/play-icon.svg" width="11" height="12" alt="" draggable="false"><span>2,738</span></div></div></div>
+          <div class="p fx-rise-s" style="left:26px;top:329px;width:283px;--d:600ms"><div class="country"><div class="c-top"><img class="flag" src="assets/fig/flag-usa.webp" alt="" draggable="false"><span class="c-name">USA</span><span class="c-pct">58%</span></div><div class="bar"><div class="p fx-fill" style="left:0px;top:0;width:165px;height:6px;--d:700ms;--dur:1000ms"><img src="assets/fig/fill-1.svg" alt="" draggable="false"></div></div></div></div>
+          <div class="p fx-rise-s" style="left:66px;top:388px;width:283px;--d:720ms"><div class="country"><div class="c-top"><img class="flag" src="assets/fig/flag-nigeria.webp" alt="" draggable="false"><span class="c-name">Nigeria</span><span class="c-pct">28%</span></div><div class="bar"><div class="p fx-fill" style="left:1px;top:0;width:84px;height:6px;--d:820ms;--dur:1000ms"><img src="assets/fig/fill-2.svg" alt="" draggable="false"></div></div></div></div>
+          <div class="p fx-rise-s" style="left:26px;top:447px;width:283px;--d:840ms"><div class="country"><div class="c-top"><img class="flag" src="assets/fig/flag-australia.webp" alt="" draggable="false"><span class="c-name">Australia</span><span class="c-pct">14%</span></div><div class="bar"><div class="p fx-fill" style="left:1px;top:0;width:32px;height:6px;--d:940ms;--dur:1000ms"><img src="assets/fig/fill-3.svg" alt="" draggable="false"></div></div></div></div>
+          <div class="p fx-pop" style="left:161px;top:48px;width:72px;height:72px;--d:0ms"><img class="idle-pulse" src="assets/fig/orb-play.svg" width="72" height="72" alt="" draggable="false"></div>
         </div>
         <div class="copy">
           <h1>Know who’s listening.</h1>
@@ -105,8 +113,26 @@
 
       <section class="slide" aria-label="6 of 6">
         <div class="art">
-          <div class="p fx-pop" style="left:224px;top:48px;width:80px;height:80px;--d:320ms"><img class="idle-pulse" src="assets/p/s6-orb.webp" alt="" draggable="false"></div>
-          <div class="p fx-rise-big" style="left:0px;top:15.5px;width:374px;height:484.5px;--d:0ms"><img class="" src="assets/p/s6-card.webp" alt="" draggable="false"></div>
+          <div class="p fx-fade" style="left:-24px;top:54px;width:415px;height:443px;--d:0ms"><img src="assets/fig/fans-ellipse.svg" alt="" draggable="false"></div>
+          <div class="p fx-rise-big" style="left:27px;top:76px;width:314px;height:433px;--d:60ms">
+            <div class="post"><div class="post-inner">
+              <img class="back" src="assets/fig/arrow-back.svg" alt="" draggable="false" style="left:13.4px;top:21.8px;width:8.3728px;height:15.071px">
+              <div class="post-av"><img src="assets/fig/fans-tgut.webp" alt="" draggable="false"></div>
+              <p class="who" style="left:75.36px;top:14.65px">TGUT</p>
+              <p class="handle" style="left:75.36px;top:30.14px">@TGUT</p>
+              <i class="rule"></i>
+              <div class="body">
+                <div class="meta"><p class="time">2 mins ago</p><p class="title">Listen to my new song "Mescarole" out today!</p></div>
+                <div class="text">
+                  <p>I'm so proud to announce that "Mescarole" is out today. Check it out on Audiomack: <b>https:// audiomack.com/ciwk/album/mescarole</b></p>
+                  <p><br>It's the second single from my third album "Eternal Repeater", out 11/1/24 on my label Glamour Gowns. Please pre-order an LP now <b>https:// charliekaplan.bandcamp.com/eternal-repeater</b><br><br></p>
+                  <p>I wrote it lying flat on my back in bed one night after going to write about a concert at the end of Meserole Avenue near the border of Brooklyn and Queens. Navigating a rowdy crowd alone, I collided with a drunk ticketholder who wheeled around, enraged, and threw his half-drank beer at me, bellowing - as you might have gathered if you've already heard the song - "Asshole! You spilled my drink!" I can still see him now: An unscrewed reveler at the rim of a little gaggle within the frothy throng; wild-eyed, bruised, furious.</p>
+                </div>
+              </div>
+            </div></div>
+          </div>
+          <div class="p fx-rise-big post-fade" style="left:0;top:337px;width:375px;height:180px;--d:60ms"></div>
+          <div class="p fx-pop" style="left:228px;top:52px;width:72px;height:72px;--d:320ms"><img class="idle-pulse" src="assets/fig/orb-chat.svg" width="72" height="72" alt="" draggable="false"></div>
         </div>
         <div class="copy">
           <h1>Connect with your fans.</h1>

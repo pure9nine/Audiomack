@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="am-stacked-#ffa200_#fff">
+<rect width="72" height="72" rx="36" fill="url(#paint0_linear_0_38)"/>
+<path id="upload" d="M30.857 33.3356H23.9998L35.9999 21.6L48 33.3356H41.1428V43.3947H30.857V33.3356ZM23.9998 50.4V46.5081H48V50.4H23.9998Z" fill-rule="evenodd" clip-rule="evenodd" fill="black"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_38" x1="72" y1="36" x2="0" y2="36" gradientUnits="userSpaceOnUse">
+<stop stop-color="#ED7308"/>
+<stop offset="1" stop-color="#F9A503"/>
+</linearGradient>
+</defs>
+</svg>
