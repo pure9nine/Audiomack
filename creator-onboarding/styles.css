@@ -1,0 +1,270 @@
+:root {
+  --bg: #0d0d0d;
+  --orange: #ffa200;
+  --dot-off: #333333;
+  --sub: #cccccc;
+  --scale: 1;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: #333333;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 375x812 container, fixed in the center of the browser */
+#phone {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 375px;
+  height: 812px;
+  background: var(--bg);
+  overflow: hidden;
+  transform: translate(-50%, -50%) scale(var(--scale));
+  transform-origin: center center;
+  touch-action: pan-y;
+  cursor: grab;
+}
+#phone.dragging { cursor: grabbing; }
+
+img { display: block; -webkit-user-drag: none; }
+
+/* ---------- Fixed background glow (same on every screen) ---------- */
+/* Figma "top_blur" (node 11083:2194), exported as an image. It sits behind the
+   slides and never moves: only the graphics and text above it swipe and fade. */
+.glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 233px;
+  background: url("assets/top-blur.png") 0 0 / 375px 233px no-repeat;
+  pointer-events: none;
+}
+
+/* ---------- Slides ---------- */
+#stage, .slide { position: absolute; inset: 0; }
+
+.slide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.art {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 500px;
+  will-change: transform, opacity;
+}
+
+/* Intro graphic, built from layers on a transparent background */
+.art--intro {
+  overflow: hidden;
+}
+.art--intro > * { position: absolute; }
+.art--intro .ring {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+.art--intro .cover {
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Text block: bottom edge pinned at y=600 (matches the Figma layout) */
+.copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 212px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: -0.5px;
+  will-change: transform, opacity;
+}
+
+.copy h1 {
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.copy p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--sub);
+}
+
+/* ---------- Fixed UI ---------- */
+.status {
+  position: absolute;
+  top: 0; left: 0;
+  width: 375px;
+  height: 44px;
+  pointer-events: none;
+}
+.status-time  { position: absolute; left: 19.5px; top: 13.25px; }
+.status-right { position: absolute; right: 14.67px; top: 17.33px; }
+
+.dots {
+  position: absolute;
+  top: 624px;
+  left: 8px;
+  width: 360px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 30px;
+  background: var(--dot-off);
+  transition: background-color .3s ease;
+}
+.dots i.on { background: var(--orange); }
+
+button {
+  font: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cta {
+  position: absolute;
+  top: 664px;
+  left: 24px;
+  width: 327px;
+  height: 55px;
+  transition: transform .12s ease, opacity .12s ease;
+}
+.cta img { position: absolute; inset: 0; }
+.cta span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: #000;
+}
+.cta:active { transform: scale(.98); opacity: .9; }
+
+.login {
+  position: absolute;
+  top: 743px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 24px;
+  margin-top: -8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: #fff;
+  transition: opacity .12s ease;
+}
+.login:active { opacity: .6; }
+
+.home-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: calc(50% - 0.5px);
+  width: 134px;
+  height: 5px;
+  border-radius: 100px;
+  background: #fff;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* ---------- Entrance animations ----------
+   A slide gets .in once it is mostly in frame and loses it when fully out of
+   frame, so every visit replays. Each piece is positioned with inline styles;
+   --d is its start delay, --dur an optional duration. */
+.p { position: absolute; }
+.p > img { display: block; width: 100%; height: 100%; }
+
+.p {
+  transition: opacity .6s ease var(--d, 0ms),
+              transform .8s cubic-bezier(.22, 1, .36, 1) var(--d, 0ms);
+}
+.p.fx-pop  { transition: opacity .35s ease var(--d, 0ms),
+                         transform .75s cubic-bezier(.34, 1.56, .64, 1) var(--d, 0ms); }
+.p.fx-ring { transition: opacity .9s ease var(--d, 0ms),
+                         transform 1.1s cubic-bezier(.22, 1, .36, 1) var(--d, 0ms); }
+.p.fx-wipe, .p.fx-fill {
+  transition: clip-path var(--dur, 1000ms) cubic-bezier(.45, .05, .25, 1) var(--d, 0ms);
+}
+
+/* before: the screen is out of frame (snap back instantly, no reverse animation) */
+.slide:not(.in) .p { transition: none; opacity: 0; }
+.slide:not(.in) .p.fx-wipe,
+.slide:not(.in) .p.fx-fill { opacity: 1; clip-path: inset(0 100% 0 0); }
+.slide:not(.in) .fx-rise     { transform: translateY(16px); }
+.slide:not(.in) .fx-rise-s   { transform: translateY(8px); }
+.slide:not(.in) .fx-rise-big { transform: translateY(28px) scale(.96); }
+.slide:not(.in) .fx-pop      { transform: scale(.55); }
+.slide:not(.in) .fx-zoom     { transform: scale(.94); }
+.slide:not(.in) .fx-left     { transform: translateX(-36px); }
+.slide:not(.in) .fx-right    { transform: translateX(36px); }
+.slide:not(.in) .fx-ring     { transform: scale(.82); }
+
+/* after: in frame */
+.slide.in .p { opacity: 1; transform: none; }
+.slide.in .p.fx-wipe,
+.slide.in .p.fx-fill { clip-path: inset(0 0 0 0); }
+
+/* headline and subtext rise in just behind the graphic */
+.copy h1, .copy p {
+  transition: opacity .7s ease, transform .8s cubic-bezier(.22, 1, .36, 1);
+}
+.slide:not(.in) .copy h1,
+.slide:not(.in) .copy p { transition: none; opacity: 0; }
+.slide:not(.in) .copy h1 { transform: translateY(12px); }
+.slide:not(.in) .copy p  { transform: translateY(14px); }
+.slide.in .copy h1 { transition-delay: .12s; }
+.slide.in .copy p  { transition-delay: .24s; }
+
+/* gentle idle motion once everything has landed */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+.slide.in .idle-pulse { animation: pulse 3.6s ease-in-out calc(var(--d, 0ms) + 1s) infinite; }
+.slide.in .idle-float { animation: float 4.4s ease-in-out calc(var(--d, 0ms) + 1s + var(--ph, 0s)) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slide.in .idle-pulse, .slide.in .idle-float { animation: none; }
+}
