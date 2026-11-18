@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="am-stacked-#ffa200_#fff">
+<rect width="72" height="72" rx="36" fill="url(#paint0_linear_0_372)"/>
+<path id="Vector" d="M32.3364 51.7365C31.6482 52.4324 30.4733 51.8274 30.64 50.8629L32.6093 39.4728H24.616C23.7714 39.4728 23.3072 38.4905 23.8434 37.8379L37.8478 20.7946C38.492 20.0106 39.7595 20.5738 39.6095 21.5773L37.6953 34.3829H47.1045C47.9927 34.3829 48.4401 35.4546 47.8154 36.0861L32.3364 51.7365Z" fill="black"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_372" x1="72" y1="36" x2="0" y2="36" gradientUnits="userSpaceOnUse">
+<stop stop-color="#ED7308"/>
+<stop offset="1" stop-color="#F9A503"/>
+</linearGradient>
+</defs>
+</svg>

@@ -275,40 +275,12 @@ button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 .art p { margin: 0; }
 .art b { font-weight: 700; }
 
-/* FPO placeholder */
-.fpo {
-  font: 400 20px/1.1 "Archivo Black", "Arial Black", Impact, sans-serif;
-  letter-spacing: -0.6px;
-  color: red;
-  text-align: center;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
 /* ---------- Get discovered ---------- */
 .globe {
   display: block;
   width: 100%;
   height: 100%;
 }
-.av {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 -2px 18px rgba(0, 0, 0, .35);
-}
-.av img {
-  position: absolute;
-  left: -2px;
-  top: 0;
-  width: 100px;
-  height: 100px;
-  max-width: none;
-  object-fit: cover;
-}
-.p > img.idle-float { border-radius: 50%; }
 
 /* ---------- stat cards (Get paid, Drop as much music) ---------- */
 .stat {
@@ -459,34 +431,78 @@ button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   overflow: hidden;
   background: #0d0d0d;
 }
-.post-inner { position: absolute; left: 0; top: 0; width: 313.98px; height: 1096px; background: #0d0d0d; }
-.post-inner > * { position: absolute; }
-.post-av {
-  left: 35.17px;
-  top: 12.56px;
-  width: 33.491px;
-  height: 33.491px;
+.post-shot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 313.98px;
+  height: 532.51px;
+  overflow: hidden;
+}
+.post-shot img {
+  position: absolute;
+  left: 0;
+  top: -7.41%;
+  width: 100%;
+  height: 128.19%;
+  max-width: none;
+}
+.art > .post-fade, .post-fade { position: absolute; background: linear-gradient(175.37deg, rgba(13, 13, 13, 0) 4.2634%, #0d0d0d 87.922%); pointer-events: none; }
+
+/* ---------- Intro avatars ---------- */
+.avatar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, .1);
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 2.5px 5px rgba(0, 0, 0, .15);
 }
-.post-av img { position: absolute; left: 0; top: -17.73%; width: 100%; height: 133.33%; max-width: none; }
-.post .who    { font-size: 10.885px; font-weight: 700; line-height: 1.2; letter-spacing: -0.2093px; color: #fff; white-space: nowrap; }
-.post .handle { font-size: 10.885px; font-weight: 400; line-height: 1.2; letter-spacing: -0.4186px; color: #999; white-space: nowrap; }
-.post .rule   { left: 6.29px; top: 59.4px; width: 300.584px; height: 1px; background: rgba(255, 255, 255, .1); }
-.post .body {
-  left: 13.4px;
-  top: 73.68px;
-  width: 287.187px;
+.avatar img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* ---------- Get discovered: pills that pop in and out around the globe ----------
+   app.js toggles .show on 2-3 of them at a time, in step with the spinning globe. */
+.pill {
+  position: absolute;
   display: flex;
-  flex-direction: column;
-  gap: 6.698px;
-  overflow-wrap: break-word;
-  word-break: break-word;
+  align-items: center;
+  gap: 6px;
+  padding: 9.348px;
+  border-radius: 56.09px;
+  font-size: 13.088px;
+  font-weight: 700;
+  line-height: 13.088px;
+  letter-spacing: -0.4674px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(.5);
+  transition: opacity .18s ease, transform .22s cubic-bezier(.4, 0, 1, 1);
+  will-change: transform, opacity;
 }
-.post .meta { display: flex; flex-direction: column; gap: 3.349px; line-height: 1.2; }
-.post .time  { font-size: 10.047px; font-weight: 500; letter-spacing: -0.3349px; color: #cacaca; }
-.post .title { width: 261.231px; font-size: 15.908px; font-weight: 700; letter-spacing: -0.4186px; color: #fff; }
-.post .text p { font-size: 11.722px; font-weight: 400; line-height: 1.6; letter-spacing: -0.4186px; color: #cacaca; white-space: pre-wrap; }
-.post .text b { color: #ffa200; }
-.post-fade { background: linear-gradient(175.37deg, rgba(13, 13, 13, 0) 4.2634%, #0d0d0d 87.922%); pointer-events: none; }
+.pill img { display: block; width: 28px; height: 16px; object-fit: cover; }
+.pill.show {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity .25s ease var(--pd, 0ms), transform .5s cubic-bezier(.34, 1.56, .64, 1) var(--pd, 0ms);
+}
+.slide:not(.in) .pill { transition: none; opacity: 0; transform: scale(.5); }
+
+/* ---------- "Now Playing" share cards (More ways to grow) ----------
+   Both cards are images exported from Figma because they use Gilroy Black, which we
+   don't have. The front export was cut out of its shadow box, so the soft shadow is
+   re-added here and it falls on the card behind. */
+.share-front { filter: drop-shadow(0 0 10.552px rgba(0, 0, 0, .8)); }
+
+/* ---------- Intro parallax ----------
+   app.js sets --par on each graphic (the slide's signed distance from the centre, -1..1).
+   Elements with a --depth move that much further on top of the slide's own movement. */
+.par { translate: calc(var(--par, 0) * var(--depth, 0) * 100px) 0; }

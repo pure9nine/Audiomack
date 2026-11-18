@@ -43,6 +43,7 @@
       // graphic: fade out, then back in with the next one
       art.style.opacity   = clamp(1 - a * 1.5, 0, 1);
       art.style.transform = `translate3d(${(d * ART_SHIFT).toFixed(2)}px,0,0)`;
+      art.style.setProperty('--par', d.toFixed(4));       // drives the per-element parallax
 
       // text fades a little faster so it's gone before the next one arrives
       copy.style.opacity   = clamp(1 - a * 2.2, 0, 1);
@@ -225,10 +226,41 @@
       ctx.fillRect(0, 0, W, H);
     }
 
+    /* UI pills around the globe: they pop in one at a time, in order (the first is the
+       one on the right), then keep looping with 2-3 showing at once.
+       Each pill is on for WINDOW of a PERIOD and the four start evenly one after
+       another, so the build-up is 1, 2, 3 pills and then it settles into 2-3
+       (4 x 0.6 = 2.4 on average). */
+    const pills = Array.from(slide.querySelectorAll('.pill'));
+    const PERIOD = 4.2;        // seconds for one full cycle (a new pill pops in every PERIOD / 4)
+    const WINDOW = 0.6;        // share of the cycle each pill is visible
+    const START_DELAY = 0.6;   // let the headline and globe land first
+    let t0 = null;
+
+    function updatePills(now) {
+      if (!slide.classList.contains('in')) {
+        if (t0 !== null) { pills.forEach(p => p.classList.remove('show')); t0 = null; }
+        return;
+      }
+      if (t0 === null) t0 = now;
+      const t = (now - t0) / 1000 - START_DELAY;
+      pills.forEach((p, i) => {
+        const offset = i / pills.length;                 // pill i starts i quarter-cycles in
+        let on = false;
+        if (t / PERIOD >= offset) {                      // not before its first turn: no pill pops early
+          const phase = (((t / PERIOD - offset) % 1) + 1) % 1;
+          on = phase < WINDOW;
+        }
+        if (on !== p.classList.contains('show')) p.classList.toggle('show', on);
+      });
+    }
+
     draw(0.4);
-    if (still) return;
     (function tick(now) {
-      if (slide.classList.contains('in')) draw((now / 1000) * (2 * Math.PI / REV_SECONDS));
+      if (slide.classList.contains('in')) {
+        if (!still) draw((now / 1000) * (2 * Math.PI / REV_SECONDS));
+      }
+      updatePills(now);
       requestAnimationFrame(tick);
     })(performance.now());
   })();
